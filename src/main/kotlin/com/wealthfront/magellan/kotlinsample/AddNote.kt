@@ -21,7 +21,7 @@ class AddNoteView(context: Context) : BaseScreenView<AddNoteScreen>(context) {
     fun focus() = binding.addNoteTitle.requestFocus()
 }
 
-class AddNoteScreen(val noteId: String? = null) : Screen<AddNoteView>() {
+data class AddNoteScreen(val noteId: String? = null) : Screen<AddNoteView>() {
     override fun createView(context: Context) = AddNoteView(context)
 
     val isEditMode = noteId != null

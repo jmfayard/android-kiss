@@ -1,6 +1,7 @@
 package com.wealthfront.magellan.kotlinsample
 
 import android.content.Context
+import android.support.annotation.VisibleForTesting
 import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
 import com.marcinmoskala.kotlinandroidviewbindings.bindToText
 import com.wealthfront.magellan.BaseScreenView
@@ -15,7 +16,7 @@ class NoteDetailView(context: Context) : BaseScreenView<NoteDetailScreen>(contex
 
     var description: String by binding.noteDetailDescription.bindToText()
 
-    var onEdit: () -> Unit by binding.noteDetailEdit.bindToClick()
+    var onEditNote: () -> Unit by binding.noteDetailEdit.bindToClick()
 
 }
 
@@ -24,19 +25,22 @@ class NoteDetailScreen(val noteId: String) : Screen<NoteDetailView>() {
 
     override fun getTitle(context: Context?): String = "Note Detail"
 
-    override fun onShow(context: Context?) {
-        view.onEdit = {
-            navigator.goTo(AddNoteScreen(noteId))
-        }
+    @VisibleForTesting
+    override public fun onShow(context: Context?) {
+        view.onEditNote = this::onEditNote
+
         App.repository.getNote(noteId) { note ->
             if (note == null) {
                 toast("ERROR, cannot find note $noteId")
+                navigator.goBack()
             } else {
                 view?.title = note.title
                 view?.description = note.description
             }
         }
     }
+
+    fun onEditNote() = navigator.goTo(AddNoteScreen(noteId))
 }
 
 

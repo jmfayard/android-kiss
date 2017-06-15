@@ -87,7 +87,15 @@ dependencies {
     compile "com.jakewharton.timber:timber:4.4.0"
 
 
+    /* Testing
 
+      KotlinTest DSL https://github.com/kotlintest/kotlintest/blob/master/doc/reference.md
+      KotlinTest Matchers: https://github.com/kotlintest/kotlintest/blob/master/doc/matchers.md
+      Mockito-Kotlin https://github.com/nhaarman/mockito-kotlin/wiki/Mocking-and-verifying
+      */
+    testCompile "io.kotlintest:kotlintest:${version.kotlintest}"
+    testCompile "com.nhaarman:mockito-kotlin:1.4.0"
+    testCompile 'junit:junit:4.12'
 
     // https://github.com/MEiDIK/SlimAdapter
     // A slim & clean & typeable Adapter without# VIEWHOLDER

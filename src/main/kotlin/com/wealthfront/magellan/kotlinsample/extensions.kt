@@ -17,15 +17,31 @@ fun BaseScreenView<*>.inflateViewFrom(@LayoutRes layoutRes: Int): View =
 val BaseScreenView<*>.inflater: LayoutInflater
     get() = LayoutInflater.from(context)
 
-fun BaseScreenView<*>.toast(s: String) = Toast.makeText(context, s, Toast.LENGTH_SHORT).show()
+fun BaseScreenView<*>.toast(s: String) {
+    if (context != null) Toast.makeText(context, s, Toast.LENGTH_SHORT).show()
+}
 
-fun BaseScreenView<*>.longToast(s: String) = Toast.makeText(context, s, Toast.LENGTH_LONG).show()
+fun BaseScreenView<*>.longToast(s: String) {
+    if (context != null) Toast.makeText(context, s, Toast.LENGTH_LONG).show()
+}
 
 fun Screen<*>.toast(s: String) = (getView() as BaseScreenView<*>).toast(s)
+fun Screen<*>.longToast(s: String) = (getView() as BaseScreenView<*>).longToast(s)
 
 fun View?.hideKeyboard() {
     if (this != null) {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(getWindowToken(), 0);
+    }
+}
+
+
+// https://stackoverflow.com/questions/28550370/how-to-detect-whether-android-app-is-running-ui-test-with-espresso
+val isRunningTest: Boolean by lazy {
+    try {
+        Class.forName("junit.framework.Test")
+        true
+    } catch (e: ClassNotFoundException) {
+        false
     }
 }

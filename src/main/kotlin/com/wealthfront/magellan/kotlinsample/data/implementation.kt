@@ -1,6 +1,8 @@
 package com.wealthfront.magellan.kotlinsample.data
 
 import android.os.Handler
+import android.support.annotation.VisibleForTesting
+import com.wealthfront.magellan.kotlinsample.isRunningTest
 
 /**
  * Implementation of the Notes Service API that adds a latency simulating network.
@@ -8,6 +10,10 @@ import android.os.Handler
 class NotesServiceApiImpl : NotesServiceApi {
 
     override fun getAllNotes(onLoaded : (List<Note>) -> Unit) {
+        if (isRunningTest) {
+            onLoaded(ArrayList<Note>(NOTES_SERVICE_DATA.values))
+            return
+        }
         // Simulate network by delaying the execution.
         val handler = Handler()
         handler.postDelayed({
@@ -32,6 +38,7 @@ class NotesServiceApiImpl : NotesServiceApi {
                 Note(title = "Magellan", description = "The simplest navigation library for Android.", url = "https://github.com/wealthfront/magellan"),
                 Note(title = "Kotlin", description = "Statically typed programming language for modern multiplatform applications. 100% interoperable with Java™ and Android™.", url = "http://kotlinlang.org/")
         )
+
 
         private val SERVICE_LATENCY_IN_MILLIS = 700
         private val NOTES_SERVICE_DATA : MutableMap<String, Note> = NOTES.associateBy { it.id }.toMutableMap()
