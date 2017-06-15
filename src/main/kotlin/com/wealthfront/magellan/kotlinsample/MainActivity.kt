@@ -9,6 +9,7 @@ import com.wealthfront.magellan.Screen
 import com.wealthfront.magellan.ScreenLifecycleListener
 import com.wealthfront.magellan.support.SingleActivity
 import com.wealthfront.magellan.transitions.DefaultTransition
+import com.wealthfront.magellan.transitions.NoAnimationTransition
 
 
 class MainActivity : SingleActivity() {
@@ -26,7 +27,10 @@ class MainActivity : SingleActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            android.R.id.home -> getNavigator().goBackToRoot(NavigationType.GO)
+            android.R.id.home -> {
+                getNavigator().currentScreen().getView().hideKeyboard()
+                getNavigator().goBackToRoot(NavigationType.GO)
+            }
             else -> return super.onOptionsItemSelected(item)
         }
         return true

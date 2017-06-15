@@ -1,6 +1,7 @@
 package com.wealthfront.magellan.kotlinsample
 
 import android.content.Context
+import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
 import com.marcinmoskala.kotlinandroidviewbindings.bindToText
 import com.wealthfront.magellan.BaseScreenView
 import com.wealthfront.magellan.Screen
@@ -11,7 +12,10 @@ class NoteDetailView(context: Context) : BaseScreenView<NoteDetailScreen>(contex
     val binding: NotedetailScreenBinding = NotedetailScreenBinding.inflate(inflater, this, true)
 
     var title: String by binding.noteDetailTitle.bindToText()
+
     var description: String by binding.noteDetailDescription.bindToText()
+
+    var onEdit: () -> Unit by binding.noteDetailEdit.bindToClick()
 
 }
 
@@ -21,6 +25,9 @@ class NoteDetailScreen(val noteId: String) : Screen<NoteDetailView>() {
     override fun getTitle(context: Context?): String = "Note Detail"
 
     override fun onShow(context: Context?) {
+        view.onEdit = {
+            navigator.goTo(AddNoteScreen(noteId))
+        }
         App.repository.getNote(noteId) { note ->
             if (note == null) {
                 toast("ERROR, cannot find note $noteId")

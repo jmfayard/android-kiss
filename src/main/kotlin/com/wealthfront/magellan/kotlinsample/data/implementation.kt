@@ -29,11 +29,11 @@ class NotesServiceApiImpl : NotesServiceApi {
     companion object {
 
         private val NOTES = mutableListOf(
-                Note(title = "Oh yes!", description = "I demand trial by Unit Testing"),
-                Note(title = "Espresso", description = "UI Testing for Android")
+                Note(title = "Magellan", description = "The simplest navigation library for Android."),
+                Note(title = "Kotlin", description = "Statically typed programming language for modern multiplatform applications. 100% interoperable with Java™ and Android™.")
         )
 
-        private val SERVICE_LATENCY_IN_MILLIS = 2000
+        private val SERVICE_LATENCY_IN_MILLIS = 700
         private val NOTES_SERVICE_DATA : MutableMap<String, Note> = NOTES.associateBy { it.id }.toMutableMap()
     }
 
