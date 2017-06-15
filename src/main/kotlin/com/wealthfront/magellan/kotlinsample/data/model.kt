@@ -7,7 +7,7 @@ data class Note(
         val id : String = UUID.randomUUID().toString(),
         val title: String,
         val description: String,
-        val imageUrl: String? = null
+        val url: String? = null
 )
 
 /**

@@ -29,8 +29,8 @@ class NotesServiceApiImpl : NotesServiceApi {
     companion object {
 
         private val NOTES = mutableListOf(
-                Note(title = "Magellan", description = "The simplest navigation library for Android."),
-                Note(title = "Kotlin", description = "Statically typed programming language for modern multiplatform applications. 100% interoperable with Java™ and Android™.")
+                Note(title = "Magellan", description = "The simplest navigation library for Android.", url = "https://github.com/wealthfront/magellan"),
+                Note(title = "Kotlin", description = "Statically typed programming language for modern multiplatform applications. 100% interoperable with Java™ and Android™.", url = "http://kotlinlang.org/")
         )
 
         private val SERVICE_LATENCY_IN_MILLIS = 700
