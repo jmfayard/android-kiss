@@ -8,15 +8,9 @@ import com.wealthfront.magellan.BaseScreenView
 import com.wealthfront.magellan.Screen
 
 
-val BaseScreenView<*>.attach: Boolean
-    get() = true
-
-val BaseScreenView<*>.dontAttach: Boolean
-    get() = false
 
 fun BaseScreenView<*>.inflateViewFrom(@LayoutRes layoutRes: Int): View =
         LayoutInflater.from(context).inflate(layoutRes, this, true)
-
 
 val BaseScreenView<*>.inflater: LayoutInflater
     get() = LayoutInflater.from(context)

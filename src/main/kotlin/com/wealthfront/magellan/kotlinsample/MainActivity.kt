@@ -3,7 +3,6 @@ package com.wealthfront.magellan.kotlinsample
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import com.wealthfront.magellan.kotlinsample.screens.HomeScreen
 import com.wealthfront.magellan.NavigationType
 import com.wealthfront.magellan.Navigator
 import com.wealthfront.magellan.Screen
@@ -34,7 +33,7 @@ class MainActivity : SingleActivity() {
     }
 
     override fun createNavigator(): Navigator {
-        val navigator = Navigator.withRoot(HomeScreen())
+        val navigator = Navigator.withRoot(NotesScreen())
                 .transition(DefaultTransition())
                 .loggingEnabled(true)
                 .build()
@@ -48,7 +47,7 @@ class MainActivity : SingleActivity() {
             Log.i("Navigator", "onShow(screen = '$title')")
 
             with(supportActionBar!!) {
-                val firstScreen = screen is HomeScreen
+                val firstScreen = screen is NotesScreen
                 setDisplayUseLogoEnabled(firstScreen)
                 setDisplayHomeAsUpEnabled(!firstScreen)
             }

@@ -1,18 +1,27 @@
 package com.wealthfront.magellan.kotlinsample
 
 import android.app.Application
+import com.wealthfront.magellan.kotlinsample.data.InMemoryRepository
+import com.wealthfront.magellan.kotlinsample.data.NotesRepository
+import com.wealthfront.magellan.kotlinsample.data.NotesServiceApiImpl
 import timber.log.Timber
 
 class App : Application() {
 
+
+
     companion object {
-        lateinit var ctx : Application
+        val repository: NotesRepository by lazy {
+            InMemoryRepository(NotesServiceApiImpl())
+        }
+
+        lateinit var instance : App
             private set
     }
 
     override fun onCreate() {
         super.onCreate()
-        ctx = this
+        instance = this
 
         Timber.plant(Timber.DebugTree())
     }
