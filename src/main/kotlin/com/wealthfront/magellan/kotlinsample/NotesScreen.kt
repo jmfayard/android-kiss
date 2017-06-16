@@ -9,6 +9,7 @@ import com.wealthfront.magellan.Screen
 import com.wealthfront.magellan.kotlinsample.data.Note
 import com.wealthfront.magellan.kotlinsample.data.SectionItem
 import com.wealthfront.magellan.kotlinsample.databinding.NotesScreenBinding
+import net.idik.lib.slimadapter.SlimAdapter
 
 
 class NotesScreen : Screen<NotesView>() {
@@ -17,10 +18,8 @@ class NotesScreen : Screen<NotesView>() {
 
     override fun getTitle(context: Context?) = "Notes"
 
-    override fun onShow(context: Context?) {
-        view.onAddNote = {
-            navigator.goTo(AddNoteScreen())
-        }
+    public override fun onShow(context: Context?) {
+        view.onAddNote = this::addNote
 
         val loading = listOf(SectionItem("Loading, please wait"))
         view.slimAdapter.updateData(loading)
@@ -29,6 +28,8 @@ class NotesScreen : Screen<NotesView>() {
             view?.slimAdapter?.updateData(notes)
         }
     }
+
+    fun addNote() = navigator.goTo(AddNoteScreen())
 
     fun onItemClicked(item: Note) {
         navigator.goTo(NoteDetailScreen(item.id))
@@ -44,7 +45,7 @@ class NotesView(context: Context) : BaseScreenView<NotesScreen>(context) {
     var onAddNote : () -> Unit by binding.fab.bindToClick()
 
     val slimAdapter by lazy {
-        net.idik.lib.slimadapter.SlimAdapter.create()
+        SlimAdapter.create()
                 .register<SectionItem>(R.layout.home_item_section) { data: SectionItem, injector ->
                     injector.text(R.id.home_item_title, data.title)
                 }

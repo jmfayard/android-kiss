@@ -1,9 +1,7 @@
 package com.wealthfront.magellan.kotlinsample
 
-import android.content.Context
 import com.nhaarman.mockito_kotlin.verify
 import com.wealthfront.magellan.kotlinsample.data.Note
-import io.kotlintest.mock.mock
 import io.kotlintest.specs.StringSpec
 
 class NoteDetailScreenTest : StringSpec() {
@@ -15,21 +13,21 @@ class NoteDetailScreenTest : StringSpec() {
 
         "Show first note" {
             val note = notes.first()
-            val screen = NoteDetailScreen(note.id).withMockedView()
+            val screen = NoteDetailScreen(note.id).mockWith()
 
             verify(screen.view).title = note.title
             verify(screen.view).description = note.description
         }
 
         "Invalid note: go back" {
-            val screen = NoteDetailScreen("INVALID").withMockedView()
+            val screen = NoteDetailScreen("INVALID").mockWith()
 
             verify(screen.navigator).goBack()
         }
 
         "Going in edit note" {
             val note = notes.first()
-            val screen = NoteDetailScreen(note.id).withMockedView()
+            val screen = NoteDetailScreen(note.id).mockWith()
 
             screen.onEditNote()
 

@@ -1,6 +1,7 @@
 package com.wealthfront.magellan.kotlinsample
 
 import android.content.Context
+import android.support.annotation.VisibleForTesting
 import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
 import com.marcinmoskala.kotlinandroidviewbindings.bindToEditText
 import com.marcinmoskala.kotlinandroidviewbindings.bindToText
@@ -29,7 +30,8 @@ data class AddNoteScreen(val noteId: String? = null) : Screen<AddNoteView>() {
     override fun getTitle(context: Context?): String =
             if (isEditMode) "Edit Note" else "Add Note"
 
-    override fun onShow(context: Context?) {
+    @VisibleForTesting
+    override public fun onShow(context: Context?) {
         if (isEditMode) {
             showExistingNote()
         }
