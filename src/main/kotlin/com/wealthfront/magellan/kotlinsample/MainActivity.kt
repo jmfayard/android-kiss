@@ -37,8 +37,9 @@ class MainActivity : SingleActivity() {
     }
 
     override fun createNavigator(): Navigator {
+        val transition = if (isRunningTest) NoAnimationTransition() else DefaultTransition()
         val navigator = Navigator.withRoot(NotesScreen())
-                .transition(DefaultTransition())
+                .transition(transition)
                 .loggingEnabled(true)
                 .build()
         navigator.addLifecycleListener(LifeCycle)

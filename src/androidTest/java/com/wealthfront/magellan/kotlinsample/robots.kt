@@ -1,7 +1,5 @@
 package com.wealthfront.magellan.kotlinsample
 
-import io.kotlintest.matchers.shouldBe
-
 
 /**
  * Define a DSL for our Instrumentation Testing Robots
@@ -15,62 +13,36 @@ import io.kotlintest.matchers.shouldBe
  *
  */
 
-fun exampleRobotTest() {
-    notes {
-        nbItems() shouldBe 2
-    } addNote {
-        isNewNote() shouldBe true
-        enterTitle("Retrofit")
-        enterDescription("Rest API for Java and Android")
-    } save {
-        require(nbItems() == 3)
-        selectNote(3)
-    } showNote {
-        title() shouldBe "Retrofit"
-        description() shouldBe "Rest API for Java and Android"
-    } editNote {
-        isNewNote() shouldBe false
-        enterDescription("A type-safe HTTP client for Android and Java")
-    } save {
-        nbItems() shouldBe 3
-        val (_, description) = selectNote(3)
-        description shouldBe "A type-safe HTTP client for Android and Java"
-        selectNote(3)
-    } showNote {
-
-    } goBack {
-        nbItems() shouldBe 3
-    }
-}
-
 
 fun notes(func: NotesRobot.() -> Unit) = EspressoNotesRobot().apply(func)
 
 interface NotesRobot {
-    fun nbItems() : Int
-    fun selectNote(i: Int) : NoteData
+    fun isShown()
+    infix fun addNote(func: AddNoteRobot.() -> Unit): AddNoteRobot
 
-    infix fun showNote(func: ShowNoteRobot.() -> Unit) : ShowNoteRobot
-    infix fun addNote(func: AddNoteRobot.() -> Unit) : AddNoteRobot
+    fun selectNote(position: Int) // must be called before showNote
+    infix fun showNote(func: ShowNoteRobot.() -> Unit): ShowNoteRobot
 }
 
 interface ShowNoteRobot {
-    fun title() : String
-    fun description() : String
+    fun isShown()
+    fun hasTitle(title: String)
+    fun hasDescription(description: String)
 
-    infix fun editNote(func: AddNoteRobot.() -> Unit) : AddNoteRobot
-    infix fun goBack(func: NotesRobot.() -> Unit) : NotesRobot
+    infix fun editNote(func: AddNoteRobot.() -> Unit): AddNoteRobot
+    infix fun goBack(func: NotesRobot.() -> Unit): NotesRobot
 }
 
 interface AddNoteRobot {
-    fun title() : String
-    fun description() : String
-    fun isNewNote() : Boolean
+    fun isShown()
+    fun hasTitle(title: String)
+    fun hasDescription(description: String)
+    fun isNewNote(isNew: Boolean)
     fun enterTitle(title: String)
-    fun enterDescription(title: String)
+    fun enterDescription(description: String)
 
-    infix fun goBack(func: NotesRobot.() -> Unit) : NotesRobot
-    infix fun save(func: NotesRobot.() -> Unit) : NotesRobot
+    infix fun goBack(func: NotesRobot.() -> Unit): NotesRobot
+    infix fun save(func: NotesRobot.() -> Unit): NotesRobot
 }
 
 typealias NoteData = Pair<String, String>

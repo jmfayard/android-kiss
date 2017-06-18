@@ -45,6 +45,9 @@ android {
         versionName "1.0.0"
         applicationId "com.wealthfront.magellan.kotlinsample"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+
     }
 
     sourceSets {
@@ -80,8 +83,10 @@ dependencies {
     compile "com.android.support:design:${version.support}"
     compile "com.android.support:percent:${version.support}"
     compile "com.android.support:cardview-v7:${version.support}"
-    kapt "com.android.databinding:compiler:${version.android_gradle}"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    kapt "com.android.databinding:compiler:${version.android_gradle}"
+    compile 'com.android.support:multidex:1.0.1'
+
 
     // https://github.com/JakeWharton/timber
     compile "com.jakewharton.timber:timber:4.4.0"
@@ -98,8 +103,12 @@ dependencies {
       KotlinTest Matchers: https://github.com/kotlintest/kotlintest/blob/master/doc/matchers.md
       Mockito-Kotlin https://github.com/nhaarman/mockito-kotlin/wiki/Mocking-and-verifying
       */
-    testCompile "io.kotlintest:kotlintest:${version.kotlintest}"
-    androidTestCompile "io.kotlintest:kotlintest:${version.kotlintest}"
+    testCompile "io.kotlintest:kotlintest:${version.kotlintest}", {
+        exclude group: 'com.google.code.findbugs', module: 'annotations'
+    }
+    androidTestCompile "io.kotlintest:kotlintest:${version.kotlintest}", {
+        exclude group: 'com.google.code.findbugs', module: 'annotations'
+    }
     testCompile "com.nhaarman:mockito-kotlin:1.4.0"
     testCompile 'junit:junit:4.12'
 

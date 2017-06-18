@@ -3,6 +3,7 @@ package com.wealthfront.magellan.kotlinsample
 import android.content.Context
 import com.nhaarman.mockito_kotlin.verify
 import com.wealthfront.magellan.kotlinsample.data.Note
+import io.kotlintest.matchers.shouldBe
 import io.kotlintest.mock.mock
 import io.kotlintest.specs.StringSpec
 
