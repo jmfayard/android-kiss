@@ -8,7 +8,6 @@ import com.wealthfront.magellan.BaseScreenView
 import com.wealthfront.magellan.Screen
 import com.wealthfront.magellan.kotlinsample.data.Note
 import com.wealthfront.magellan.kotlinsample.data.SectionItem
-import com.wealthfront.magellan.kotlinsample.databinding.NotesScreenBinding
 import net.idik.lib.slimadapter.SlimAdapter
 
 
@@ -40,12 +39,15 @@ class NotesScreen : Screen<NotesView>() {
 
 class NotesView(context: Context) : BaseScreenView<NotesScreen>(context) {
 
-    val binding: NotesScreenBinding = NotesScreenBinding.inflate(inflater, this, true)
+    var onAddNote: () -> Unit by bindToClick(R.id.fab)
 
-    var onAddNote : () -> Unit by binding.fab.bindToClick()
+    val slimAdapter: SlimAdapter
 
-    val slimAdapter by lazy {
-        SlimAdapter.create()
+    init {
+        inflate(context, R.layout.notes_screen, this)
+        val recycler = findViewById(R.id.recycler) as RecyclerView
+
+        slimAdapter = SlimAdapter.create()
                 .register<SectionItem>(R.layout.home_item_section) { data: SectionItem, injector ->
                     injector.text(R.id.home_item_title, data.title)
                 }
@@ -53,13 +55,11 @@ class NotesView(context: Context) : BaseScreenView<NotesScreen>(context) {
                     injector.text(R.id.home_item_title, data.title)
                             .text(R.id.home_item_description, data.description)
                             .clicked(R.id.card_view, { _ -> screen.onItemClicked(data) })
-                }
-    }
+                }.attachTo(recycler)
 
-    init {
-        with(binding.recycler) {
+        with(recycler) {
             layoutManager = LinearLayoutManager(context)
-            adapter = slimAdapter.attachTo(binding.recycler)
+            adapter = slimAdapter
         }
     }
 

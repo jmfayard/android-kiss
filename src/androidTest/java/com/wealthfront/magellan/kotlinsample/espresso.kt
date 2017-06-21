@@ -1,5 +1,6 @@
 package com.wealthfront.magellan.kotlinsample
 
+import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
@@ -63,7 +64,7 @@ class EspressoShowNoteRobot : ShowNoteRobot {
     }
 
     override fun goBack(func: NotesRobot.() -> Unit): NotesRobot {
-        onView(withContentDescription("Navigate up")).perform(click())
+        pressBack()
         return EspressoNotesRobot().apply { isShown() ; func() }
     }
 
@@ -111,7 +112,7 @@ class EspressoAddNoteRobot : AddNoteRobot {
     }
 
     override fun goBack(func: NotesRobot.() -> Unit): NotesRobot {
-        onView(withContentDescription("Navigate up")).perform(click())
+        pressBack()
         return notes(func)
     }
 

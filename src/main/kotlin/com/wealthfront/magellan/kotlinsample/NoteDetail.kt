@@ -6,17 +6,18 @@ import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
 import com.marcinmoskala.kotlinandroidviewbindings.bindToText
 import com.wealthfront.magellan.BaseScreenView
 import com.wealthfront.magellan.Screen
-import com.wealthfront.magellan.kotlinsample.databinding.NotedetailScreenBinding
 
 class NoteDetailView(context: Context) : BaseScreenView<NoteDetailScreen>(context) {
 
-    val binding: NotedetailScreenBinding = NotedetailScreenBinding.inflate(inflater, this, true)
+    init {
+        inflate(context, R.layout.notedetail_screen, this)
+    }
 
-    var title: String by binding.noteDetailTitle.bindToText()
+    var title: String by bindToText(R.id.note_detail_title)
 
-    var description: String by binding.noteDetailDescription.bindToText()
+    var description: String by bindToText(R.id.note_detail_description)
 
-    var onEditNote: () -> Unit by binding.noteDetailEdit.bindToClick()
+    var onEditNote: () -> Unit by bindToClick(R.id.note_detail_edit)
 
 }
 

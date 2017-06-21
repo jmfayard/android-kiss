@@ -4,22 +4,23 @@ import android.content.Context
 import android.support.annotation.VisibleForTesting
 import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
 import com.marcinmoskala.kotlinandroidviewbindings.bindToEditText
-import com.marcinmoskala.kotlinandroidviewbindings.bindToText
+import com.marcinmoskala.kotlinandroidviewbindings.bindToRequestFocus
 import com.wealthfront.magellan.BaseScreenView
 import com.wealthfront.magellan.Screen
 import com.wealthfront.magellan.kotlinsample.data.Note
-import com.wealthfront.magellan.kotlinsample.databinding.AddnoteScreenBinding
 
 class AddNoteView(context: Context) : BaseScreenView<AddNoteScreen>(context) {
-    val binding: AddnoteScreenBinding = AddnoteScreenBinding.inflate(inflater, this, true)
+    init {
+        inflate(context, R.layout.addnote_screen, this)
+    }
 
-    var onSubmit : () -> Unit by binding.addNoteSave.bindToClick()
+    var onSubmit: () -> Unit by bindToClick(R.id.add_note_save)
 
-    var title: String by binding.addNoteTitle.bindToEditText()
+    var title: String by bindToEditText(R.id.add_note_title)
 
-    var description: String by binding.addNoteDescription.bindToEditText()
+    var description: String by bindToEditText(R.id.add_note_description)
 
-    fun focus() = binding.addNoteTitle.requestFocus()
+    val focus: () -> Unit by bindToRequestFocus(R.id.add_note_title)
 }
 
 data class AddNoteScreen(val noteId: String? = null) : Screen<AddNoteView>() {
@@ -52,7 +53,7 @@ data class AddNoteScreen(val noteId: String? = null) : Screen<AddNoteView>() {
         }
     }
 
-    fun updatedNote() : Note = if (isEditMode) {
+    fun updatedNote(): Note = if (isEditMode) {
         Note(id = noteId!!, title = view.title, description = view.description)
     } else {
         Note(title = view.title, description = view.description)
