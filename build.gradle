@@ -1,14 +1,5 @@
-def version = [
-        "magellan": "1.0.0",
-        "support": "25.4.0",
-        "kotlintest" : "2.0.3",
-        "junit": "4.12",
-        "KotlinAndroidViewBindings": "0.08"
-]
-
 buildscript {
-    ext.kotlin_version = '1.1.2-4'
-    ext.android_gradle = "3.0.0-alpha4"
+    ext.kotlin_version = '1.1.51'
 
     repositories {
         google()
@@ -16,10 +7,26 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:$android_gradle"
+        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
+plugins {
+    id 'com.gradle.build-scan' version '1.8'
+}
+apply plugin: "com.android.application"
+apply plugin: 'kotlin-android'
+
+
+def versions = [
+        "magellan": "1.0.0",
+        "support": "26.1.0",
+        "kotlintest" : "2.0.3",
+        "junit": "4.12",
+        "KotlinAndroidViewBindings": "0.08",
+        "timber": "4.5.1",
+        "constraint": "1.0.2"
+]
 
 repositories {
     google()
@@ -28,17 +35,13 @@ repositories {
 
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-//apply plugin: 'kotlin-kapt'
+
 
 
 android {
 
-//    dataBinding.enabled = true
-
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         minSdkVersion 21
@@ -48,8 +51,6 @@ android {
         applicationId "com.wealthfront.magellan.kotlinsample"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-
-
     }
 
     sourceSets {
@@ -58,7 +59,7 @@ android {
     }
 
     packagingOptions {
-        exclude 'LICENSE.txt'
+        exclude "LICENSE.txt"
     }
 }
 
@@ -66,11 +67,11 @@ dependencies {
 
     // Magellan, the Simplest Navigation for Android
     // https://github.com/wealthfront/magellan
-    compile 'com.wealthfront:magellan:' + version.magellan
-    compile 'com.wealthfront:magellan-support:' + version.magellan
+    compile "com.wealthfront:magellan:${versions.magellan}"
+    compile "com.wealthfront:magellan-support:${versions.magellan}"
 
     // http://marcinmoskala.com/android/kotlin/2017/05/05/still-mvp-or-already-mvvm.html
-    compile "com.github.MarcinMoskala:KotlinAndroidViewBindings:${version.KotlinAndroidViewBindings}"
+    compile "com.github.MarcinMoskala:KotlinAndroidViewBindings:${versions.KotlinAndroidViewBindings}"
 
 
     // Kotlin
@@ -79,23 +80,22 @@ dependencies {
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 
     // Google Libs
-    compile "com.android.support:support-v4:${version.support}"
-    compile "com.android.support:appcompat-v7:${version.support}"
-    compile "com.android.support:preference-v7:${version.support}"
-    compile "com.android.support:design:${version.support}"
-    compile "com.android.support:percent:${version.support}"
-    compile "com.android.support:cardview-v7:${version.support}"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-//    kapt "com.android.databinding:compiler:${android_gradle}"
-    compile 'com.android.support:multidex:1.0.1'
+    compile "com.android.support:support-v4:${versions.support}"
+    compile "com.android.support:appcompat-v7:${versions.support}"
+    compile "com.android.support:preference-v7:${versions.support}"
+    compile "com.android.support:design:${versions.support}"
+    compile "com.android.support:percent:${versions.support}"
+    compile "com.android.support:cardview-v7:${versions.support}"
+    compile "com.android.support.constraint:constraint-layout:${versions.constraint}"
+    compile "com.android.support:multidex:1.0.2"
 
 
     // https://github.com/JakeWharton/timber
-    compile "com.jakewharton.timber:timber:4.4.0"
+    compile "com.jakewharton.timber:timber:${versions.timber}"
 
     // https://github.com/MEiDIK/SlimAdapter
     // A slim & clean & typeable Adapter without# VIEWHOLDER
-    compile 'net.idik:slimadapter:1.3.0'
+    compile "net.idik:slimadapter:1.3.0"
 
 
 
@@ -105,24 +105,38 @@ dependencies {
       KotlinTest Matchers: https://github.com/kotlintest/kotlintest/blob/master/doc/matchers.md
       Mockito-Kotlin https://github.com/nhaarman/mockito-kotlin/wiki/Mocking-and-verifying
       */
-    testCompile "io.kotlintest:kotlintest:${version.kotlintest}", {
-        exclude group: 'com.google.code.findbugs', module: 'annotations'
+    testCompile "io.kotlintest:kotlintest:${versions.kotlintest}", {
+        exclude group: "com.google.code.findbugs", module: "annotations"
     }
-    androidTestCompile "io.kotlintest:kotlintest:${version.kotlintest}", {
-        exclude group: 'com.google.code.findbugs', module: 'annotations'
+    androidTestCompile "io.kotlintest:kotlintest:${versions.kotlintest}", {
+        exclude group: "com.google.code.findbugs", module: "annotations"
     }
-    testCompile "com.nhaarman:mockito-kotlin:1.4.0"
-    testCompile 'junit:junit:4.12'
+    testCompile "com.nhaarman:mockito-kotlin:1.5.0"
+    testCompile "junit:junit:${versions.junit}"
 
 
 
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
+    androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.2"
+    androidTestCompile "com.android.support.test.espresso:espresso-contrib:2.2.2"
+}
+
+
+configurations.all {
+    resolutionStrategy {
+        force "com.android.support:appcompat-v7:${versions.support}"
+        force "com.android.support:preference-v7:${versions.support}"
+        force "com.android.support.constraint:constraint-layout:${versions.constraint}"
+        force "com.android.support:design:${versions.support}"
+        force "com.android.support:percent:${versions.support}"
+        force "com.android.support:support-v13:${versions.support}"
     }
-    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'design'
-        exclude group: 'com.android.support', module: 'recyclerview-v7'
-    }
+}
+
+
+buildScan {
+// Uncomment the lines below to agree to the Terms of Service.
+    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+    licenseAgree = "yes"
+    tag "SAMPLE"
+    link "GitHub", 'https://github.com/gradle/gradle-build-scan-quickstart'
 }

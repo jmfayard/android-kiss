@@ -26,6 +26,7 @@ fun AddNoteScreen.mockWith(
     view = mock<AddNoteView> {
         on(AddNoteView::title) doReturn title
         on(AddNoteView::description) doReturn description
+        on(AddNoteView::focus) doReturn {}
     }
     onShow(mock())
 }

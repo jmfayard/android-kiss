@@ -45,7 +45,7 @@ class NotesView(context: Context) : BaseScreenView<NotesScreen>(context) {
 
     init {
         inflate(context, R.layout.notes_screen, this)
-        val recycler = findViewById(R.id.recycler) as RecyclerView
+        val recycler : RecyclerView = findViewById(R.id.recycler)
 
         slimAdapter = SlimAdapter.create()
                 .register<SectionItem>(R.layout.home_item_section) { data: SectionItem, injector ->
