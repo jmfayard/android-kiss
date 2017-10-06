@@ -1,6 +1,7 @@
 package com.wealthfront.magellan.kotlinsample
 
 import android.content.Context
+import android.provider.Settings
 import android.support.annotation.LayoutRes
 import android.view.LayoutInflater
 import android.view.View
@@ -36,12 +37,17 @@ fun View?.hideKeyboard() {
 }
 
 
-// https://stackoverflow.com/questions/28550370/how-to-detect-whether-android-app-is-running-ui-test-with-espresso
+
 val isRunningTest: Boolean by lazy {
-    try {
-        Class.forName("junit.framework.Test")
-        true
-    } catch (e: ClassNotFoundException) {
-        false
-    }
+    val firebaseTestLab = Settings.System.getString(App.instance.contentResolver, "firebase.test.lab")
+    classExists("junit.framework.Test") || firebaseTestLab == "true"
 }
+
+// https://stackoverflow.com/questions/28550370/how-to-detect-whether-android-app-is-running-ui-test-with-espresso
+fun classExists(fullyQualifiedName: String) : Boolean =
+        try {
+            Class.forName(fullyQualifiedName)
+            true
+        } catch (e: ClassNotFoundException) {
+            false
+        }
