@@ -25,7 +25,8 @@ gcloud firebase test android run \
   --type robo \
   --app "$APK" \
   --device model="$DEVICE_NEXUS6P" \
-  --timeout 90s
+  --timeout 90s \
+  --robo-directives
 
 
 gcloud firebase test android run \
