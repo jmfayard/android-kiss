@@ -39,8 +39,8 @@ fun View?.hideKeyboard() {
 
 
 val isRunningTest: Boolean by lazy {
-    val firebaseTestLab = Settings.System.getString(App.instance.contentResolver, "firebase.test.lab")
-    classExists("junit.framework.Test") || firebaseTestLab == "true"
+//    val firebaseTestLab = "true" == Settings.System.getString(App.instance.contentResolver, "firebase.test.lab")
+    classExists("junit.framework.Test")
 }
 
 // https://stackoverflow.com/questions/28550370/how-to-detect-whether-android-app-is-running-ui-test-with-espresso
