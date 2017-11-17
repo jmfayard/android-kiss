@@ -20,58 +20,109 @@ Written in Kotlin
 
 This sample is written in [Kotlin](kotlinlang.org) and shows additional techniques to make writing views even simpler, and make both unit testing and instrumentation tests straightforward (as it should be for a reimplementation of the android-testing codelab)
 
-Views
-------
+Delegated Properties
+--------------------
 
 In a traditional MVP project, the views are often full of one-liner methods that are just setting something on layout or checking some properties
 
 ```kotlin
-override fun getDescription(): String {
-    return addNoteDescription.text.toString()
+override fun getPassword(): String {
+  return passwordView.text.toString()
 }
-override fun setDescription(description: String) {
-    addNoteDescription.text = description
-}
-```
-
-A nice approach to avoid to avoid this boilerplate in kotlin was recommanded and implented by [Marcin Moskala](http://marcinmoskala.com/android/kotlin/2017/05/05/still-mvp-or-already-mvvm.html)
-
-it consists of using [Delegated Properties](https://kotlinlang.org/docs/reference/delegated-properties.html)
-
-```kotlin
-class AddNoteView(context: Context) : BaseScreenView<AddNoteScreen>(context) {
-    // ....
-    var description : String by addNoteDescription.bindToEditText()
-    var title       : String by addNoteTitle.bindToEditText()
-    var onSubmit    : () -> Unit by addNoteSave.bindToClick()
+override fun setPassword(password: String) {
+  passwordView.text = name
 }
 ```
 
-The API of our Magellan View is now as simple and stupid as it should be:
+Marcin Moskala had the insight that all those functions can be abstracted by a kotlin property `var password: String`,
+with a getter and a setter that could be delegated to a library.
 
-```kotlin
-class AddNoteScreen() : Screen<AddNoteView>() {
+- a TextView can be abstracted by `var label: String`
+- an EditText can be abstracted by `var input: String`
+- a view visibility can be abstracted by `var loading: Boolean`
+- an onclick Listener can be abstracted by `var onSubmit: () -> Unit`
 
-    override public fun onShow(context: Context) {
-        view.title = "Initial Title"
-        view.description = "Initial Description"
-        view.onSubmit = {
-            submitNewNote( view.title, view.description )
+Check out [KotlinAndroidViewBindings](https://github.com/MarcinMoskala/KotlinAndroidViewBindings)
+
+In practice
+-----------
+
+I leveraged this pattern for Magellan with two base classes `MagellanView<Display>` and `MagellanScreen<Display>`
+where `<Display>` is any interface with a bag of properties, below `AddNote`
+
+Our `AddNote` is available inside `AddNotesScreen` via the `display` (nullable) property.
+
+
+```
+interface AddNote {
+    var title: String
+
+    var description: String
+
+    // UiCallback, a `typealias` for () -> Unit, is what you use for an onClickListener
+    var onSubmit: UiCallback
+}
+
+class AddNoteScreen() : MagellanScreen<AddNote>() {
+
+    override fun createView(context: Context) : MagellanView<AddNote>
+        = MagellanView(context, R.layout.addnote_screen, FrameLayout::displayAddNote)
+
+    override public fun onShow(context: Context?) {
+        display?.title = "Set an initial title"
+        display?.description = "Set an initial description"
+        display?.onSubmit = {
+            doSomethingWith(display?.title, display?.description)
         }
     }
 }
 ```
 
+
+
+As you may notice, we don't define our own subclass for the view. Instead
+
+- an extension function `displayAddNote()` creates an `AddNote` backed by delegated properties
+- a fake implementation of `AddNote` is created by a simple data class
+
+```kotlin
+
+fun FrameLayout.displayAddNote() = object : AddNote {
+    override var onSubmit    : UiCallback by bindToClick(R.id.add_note_save)
+    override var title       : String     by bindToEditText(R.id.add_note_title)
+    override var description : String     by bindToEditText(R.id.add_note_description)
+}
+
+data class TestAddNote(
+    override var title: String,
+    override var description: String,
+    override var onSubmit: UiCallback = NOOP
+) : AddNote
+```
+
+
+
+
 Unit Tests
 ----------
 
-The sample app shows how straightforward it can be to write unit tests for our Magellan `Screen`
+Using the above strategy, unit testing is super simple because we rely very little on mocking (except for getNavigator() and getActivity())
 
-Notes:
+Instead we have our `data class TestAddNote` that is trivial to test
 
-- we are using the useful wrapper [mockito-kotlin](https://github.com/nhaarman/mockito-kotlin)
-- thanks to [this configuration](https://github.com/jmfayard/android-kotlin-magellan/blob/master/src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker), Mockito can mock our kotlin classes (final by default)
-- mocking a magellan `Screen` consist of mocking the Magellan `Navigator`, mocking the `View`, also providing return values for our delegated properties (`var description: String`, `var title: String`), and then calling `Screen.onShow()`. See `mocks.kt`
+```
+
+@Test fun editExistingNote() {
+    val note = notes.first()
+    val screen = AddNoteScreen(noteId = note.id)
+    screen.setupForTests(AddNote.TEST, mockNavigator, mockActivity)
+
+    val display = requireNotNull(screen.display)
+    display.title shouldBe note.title
+    display.description shouldBe note.description
+}
+```
+
 
 See the [Unit Tests](https://github.com/jmfayard/android-kotlin-magellan/tree/master/src/test/kotlin/com/wealthfront/magellan/kotlinsample)
 
