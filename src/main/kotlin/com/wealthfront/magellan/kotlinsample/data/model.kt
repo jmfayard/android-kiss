@@ -4,9 +4,9 @@ import java.util.*
 
 
 data class Note(
-        val id : String = UUID.randomUUID().toString(),
-        val title: String,
+        val id: String = UUID.randomUUID().toString(),
         val description: String,
+        val title: String,
         val url: String? = null
 )
 
@@ -25,7 +25,7 @@ interface NotesServiceApi {
 
 interface NotesRepository {
 
-    fun getNotes(onNotesLoaded: (List<Note>) -> Unit)
+    fun getNotes(onNotesLoaded:  (List<Note>) -> Unit)
 
     fun getNote(noteId: String, onNoteLoaded: (Note?) -> Unit)
 
@@ -37,4 +37,8 @@ interface NotesRepository {
 
 
 
-data class SectionItem(val title: String)
+data class SectionItem(val title: String) {
+    companion object {
+        val LoadingList = listOf(SectionItem("Loading, please wait"))
+    }
+}

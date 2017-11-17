@@ -16,6 +16,7 @@ package com.wealthfront.magellan.kotlinsample
 
 fun notes(func: NotesRobot.() -> Unit) = EspressoNotesRobot().apply(func)
 
+/** See [EspressoNotesRobot] **/
 interface NotesRobot {
     fun isShown()
     infix fun addNote(func: AddNoteRobot.() -> Unit): AddNoteRobot
@@ -24,6 +25,7 @@ interface NotesRobot {
     infix fun showNote(func: ShowNoteRobot.() -> Unit): ShowNoteRobot
 }
 
+/** See [EspressoShowNoteRobot] **/
 interface ShowNoteRobot {
     fun isShown()
     fun hasTitle(title: String)
@@ -33,6 +35,7 @@ interface ShowNoteRobot {
     infix fun goBack(func: NotesRobot.() -> Unit): NotesRobot
 }
 
+/** See [EspressoAddNoteRobot] **/
 interface AddNoteRobot {
     fun isShown()
     fun hasTitle(title: String)
@@ -45,4 +48,3 @@ interface AddNoteRobot {
     infix fun save(func: NotesRobot.() -> Unit): NotesRobot
 }
 
-typealias NoteData = Pair<String, String>

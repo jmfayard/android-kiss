@@ -1,38 +1,38 @@
 package com.wealthfront.magellan.kotlinsample
 
 import com.nhaarman.mockito_kotlin.verify
-import com.wealthfront.magellan.kotlinsample.data.Note
+import io.kotlintest.matchers.shouldBe
 import io.kotlintest.specs.StringSpec
 
-class NoteDetailScreenTest : StringSpec() {
-    lateinit var notes: List<Note>
+class NoteDetailScreenTest : StringSpec() { init {
+    val notes = fetchNotes()
+    val idFirstNote = notes.first().id
 
-    init {
+    "Show first note" {
+        val screen = NoteDetailScreen(idFirstNote)
+        screen.setupForTests(TestNoteDetail.EMPTY, mockNavigator, mockActivity)
 
-        App.repository.getNotes { notes = it }
-
-        "Show first note" {
-            val note = notes.first()
-            val screen = NoteDetailScreen(note.id).mockWith()
-
-            verify(screen.view).title = note.title
-            verify(screen.view).description = note.description
-        }
-
-        "Invalid note: go back" {
-            val screen = NoteDetailScreen("INVALID").mockWith()
-
-            verify(screen.navigator).goBack()
-        }
-
-        "Going in edit note" {
-            val note = notes.first()
-            val screen = NoteDetailScreen(note.id).mockWith()
-
-            screen.onEditNote()
-
-            verify(screen.navigator).goTo(AddNoteScreen(note.id))
-        }
-
+        val display = requireNotNull(screen.display)
+        val note = notes.first()
+        display.title shouldBe note.title
+        display.description shouldBe note.description
     }
+
+    "Invalid note: go back" {
+        val screen = NoteDetailScreen("INVALID")
+        screen.setupForTests(TestNoteDetail.EMPTY, mockNavigator, mockActivity)
+
+        verify(screen.navigator).goBack()
+    }
+
+    "Going in edit note" {
+        val screen = NoteDetailScreen(idFirstNote)
+        screen.setupForTests(TestNoteDetail.EMPTY, mockNavigator, mockActivity)
+
+        screen.onEditNote()
+
+        verify(screen.navigator).goTo(AddNoteScreen(idFirstNote))
+    }
+
+}
 }

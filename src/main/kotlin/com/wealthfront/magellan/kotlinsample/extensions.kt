@@ -1,33 +1,26 @@
 package com.wealthfront.magellan.kotlinsample
 
 import android.content.Context
-import android.provider.Settings
-import android.support.annotation.LayoutRes
-import android.view.LayoutInflater
+import android.support.annotation.StringRes
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import com.wealthfront.magellan.BaseScreenView
-import com.wealthfront.magellan.Screen
 
 
-
-fun BaseScreenView<*>.inflateViewFrom(@LayoutRes layoutRes: Int): View =
-        LayoutInflater.from(context).inflate(layoutRes, this, true)
-
-val BaseScreenView<*>.inflater: LayoutInflater
-    get() = LayoutInflater.from(context)
-
-fun BaseScreenView<*>.toast(s: String) {
-    if (context != null) Toast.makeText(context, s, Toast.LENGTH_SHORT).show()
+fun toast(message: String, long: Boolean = false) {
+    if (isRunningTest) return
+    val length = if (long) Toast.LENGTH_LONG else Toast.LENGTH_SHORT
+    // use the applicationContext so that the toast is shown even if the screen is not in the foreground
+    Toast.makeText(applicationContext(), message, length).show()
 }
 
-fun BaseScreenView<*>.longToast(s: String) {
-    if (context != null) Toast.makeText(context, s, Toast.LENGTH_LONG).show()
+fun toast(@StringRes message: Int, long: Boolean = false, vararg formatArgs: Any) {
+    val i18nMessage = applicationContext().getString(message, *formatArgs)
+    toast(i18nMessage, long)
 }
 
-fun Screen<*>.toast(s: String) = (getView() as BaseScreenView<*>).toast(s)
-fun Screen<*>.longToast(s: String) = (getView() as BaseScreenView<*>).longToast(s)
+private fun applicationContext() = App.instance
+
 
 fun View?.hideKeyboard() {
     if (this != null) {
@@ -37,14 +30,13 @@ fun View?.hideKeyboard() {
 }
 
 
-
 val isRunningTest: Boolean by lazy {
-//    val firebaseTestLab = "true" == Settings.System.getString(App.instance.contentResolver, "firebase.test.lab")
+    //    val firebaseTestLab = "true" == Settings.System.getString(App.instance.contentResolver, "firebase.test.lab")
     classExists("junit.framework.Test")
 }
 
 // https://stackoverflow.com/questions/28550370/how-to-detect-whether-android-app-is-running-ui-test-with-espresso
-fun classExists(fullyQualifiedName: String) : Boolean =
+fun classExists(fullyQualifiedName: String): Boolean =
         try {
             Class.forName(fullyQualifiedName)
             true
