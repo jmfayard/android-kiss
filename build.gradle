@@ -7,12 +7,13 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.1.0-alpha03'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 plugins {
-    id 'com.gradle.build-scan' version '1.8'
+    id 'com.gradle.build-scan' version '1.10.2'
+    id 'com.github.ben-manes.versions' version '0.17.0'
 }
 apply plugin: "com.android.application"
 apply plugin: 'kotlin-android'
@@ -22,11 +23,12 @@ def versions = [
         "constraint": "1.0.2",
         "espresso": "3.0.1",
         "junit": "4.12",
-        "KotlinAndroidViewBindings": "0.08",
-        "kotlintest" : "2.0.3",
+        "KotlinAndroidViewBindings": "0.10",
+        "kotlintest" : "2.0.7",
         "magellan": "1.0.0",
-        "support": "26.1.0",
-        "timber": "4.5.1",
+        "slimadapter" : "2.1.2",
+        "support": "27.0.1",
+        "timber": "4.6.0",
 ]
 
 repositories {
@@ -41,8 +43,7 @@ repositories {
 
 android {
 
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
 
     defaultConfig {
         minSdkVersion 21
@@ -94,7 +95,7 @@ dependencies {
 
     // https://github.com/MEiDIK/SlimAdapter
     // A slim & clean & typeable Adapter without# VIEWHOLDER
-    compile "net.idik:slimadapter:1.3.0"
+    compile "net.idik:slimadapter:${versions.slimadapter}"
 
 
     /** JSR-305 nullability annotations: **/
@@ -145,5 +146,21 @@ buildScan {
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
         freeCompilerArgs = ["-Xjsr305=strict"]
+    }
+}
+
+task printProperties {
+    group = 'help'
+    doLast {
+        def properties = ['org.gradle.java.home', 'org.gradle.jvmargs']
+        def systemProperties = ['file.encoding', 'user.country', 'user.language', 'java.io.tmpdir', 'user.variant']
+        println("Detecting what could cause incompatible gradle daemons")
+        println("Run './gradlew printProperties' from the command-line and the same task Android studio")
+        println("See https://docs.gradle.org/4.1/userguide/build_environment.html")
+        println("See https://docs.gradle.org/4.1/userguide/gradle_daemon.html#daemon_faq")
+        println()
+        println "JAVA_HOME=" + System.getenv("JAVA_HOME")
+        properties.forEach { prop -> println(prop + "=" + project.findProperty(prop)) }
+        systemProperties.forEach { prop -> println(prop + "=" + System.properties[prop]) }
     }
 }

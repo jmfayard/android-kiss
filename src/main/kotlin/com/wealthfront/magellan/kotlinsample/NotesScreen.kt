@@ -1,30 +1,24 @@
 package com.wealthfront.magellan.kotlinsample
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
-import com.wealthfront.magellan.BaseScreenView
-import com.wealthfront.magellan.Screen
 import com.wealthfront.magellan.kotlinsample.data.Note
 import com.wealthfront.magellan.kotlinsample.data.SectionItem
-import net.idik.lib.slimadapter.SlimAdapter
 
 
-class NotesScreen : Screen<NotesView>() {
+class NotesScreen : MagellanScreen<Notes>() {
 
-    override fun createView(context: Context) = NotesView(context)
+    override fun createView(context: Context): MagellanView<Notes> =
+            MagellanView(context, Notes.layout, MagellanView<Notes>::displayNotes)
 
     override fun getTitle(context: Context?) = "Notes"
 
     public override fun onShow(context: Context?) {
-        view.onAddNote = this::addNote
+        display?.onAddNote = { addNote() }
 
-        val loading = listOf(SectionItem("Loading, please wait"))
-        view.slimAdapter.updateData(loading)
+        display?.slimAdapter?.updateData(SectionItem.LoadingList)
 
         App.Companion.repository.getNotes { notes: List<Note> ->
-            view?.slimAdapter?.updateData(notes)
+            display?.slimAdapter?.updateData(notes)
         }
     }
 
@@ -36,32 +30,3 @@ class NotesScreen : Screen<NotesView>() {
 
 }
 
-
-class NotesView(context: Context) : BaseScreenView<NotesScreen>(context) {
-
-    var onAddNote: () -> Unit by bindToClick(R.id.fab)
-
-    val slimAdapter: SlimAdapter
-
-    init {
-        inflate(context, R.layout.notes_screen, this)
-        val recycler : RecyclerView = findViewById(R.id.recycler)
-
-        slimAdapter = SlimAdapter.create()
-                .register<SectionItem>(R.layout.home_item_section) { data: SectionItem, injector ->
-                    injector.text(R.id.home_item_title, data.title)
-                }
-                .register<Note>(R.layout.home_item_card) { data: Note, injector ->
-                    injector.text(R.id.home_item_title, data.title)
-                            .text(R.id.home_item_description, data.description)
-                            .clicked(R.id.card_view, { _ -> screen.onItemClicked(data) })
-                }.attachTo(recycler)
-
-        with(recycler) {
-            layoutManager = LinearLayoutManager(context)
-            adapter = slimAdapter
-        }
-    }
-
-
-}

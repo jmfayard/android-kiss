@@ -1,40 +1,54 @@
 package com.wealthfront.magellan.kotlinsample
 
-import android.content.Context
-import com.nhaarman.mockito_kotlin.verify
-import com.wealthfront.magellan.kotlinsample.data.Note
 import io.kotlintest.matchers.shouldBe
-import io.kotlintest.mock.mock
+import io.kotlintest.matchers.shouldNotBe
 import io.kotlintest.specs.StringSpec
 
-class AddNoteScreenTest : StringSpec() {
-    lateinit var notes: List<Note>
-    val ctx : Context = mock()
 
-    init {
+class AddNoteScreenTest : StringSpec() {init {
+    val notes = fetchNotes()
 
-        App.repository.getNotes { notes = it }
+    "Add a new note" {
+        val screen = AddNoteScreen(noteId = null)
+        screen.setupForTests(AddNote.TEST, mockNavigator, mockActivity)
 
-        "Add a new note" {
-            val screen = AddNoteScreen(noteId = null)
-                    .mockWith(title = "Note Title", description = "Note Description")
+        screen.getTitle(mockContext) shouldBe "Add Note"
 
-            screen.getTitle(ctx) shouldBe "Add Note"
-            val note = screen.updatedNote()
-            note.title shouldBe "Note Title"
-            note.description shouldBe "Note Description"
-        }
-
-        "Edit an existing note" {
-            val note = notes.first()
-            val screen = AddNoteScreen(noteId = note.id).mockWith()
-
-            screen.getTitle(ctx) shouldBe "Edit Note"
-            verify(screen.view).title = note.title
-            verify(screen.view).description = note.description
-        }
-
-
+        val display = requireNotNull(screen.display)
+        display.title shouldBe ""
+        display.description shouldBe ""
 
     }
+
+    "Edit an existing note" {
+        val note = notes.first()
+        val screen = AddNoteScreen(noteId = note.id)
+        screen.setupForTests(AddNote.TEST, mockNavigator, mockActivity)
+
+        screen.getTitle(mockContext) shouldBe "Edit Note"
+
+        val display = requireNotNull(screen.display)
+        display.title shouldBe note.title
+        display.description shouldBe note.description
+
+    }
+
+
+    "Submitting the note" {
+        val screen = AddNoteScreen(noteId = null)
+        screen.setupForTests(AddNote.TEST, mockNavigator, mockActivity)
+
+        val display = requireNotNull(screen.display)
+        display.title = "Note Title"
+        display.description = "Note Description"
+
+        screen.updatedNote().let { (id, description, title, _) ->
+            id shouldNotBe ""
+            title shouldBe display.title
+            description shouldBe display.description
+        }
+    }
+
+
+}
 }

@@ -1,38 +1,27 @@
 package com.wealthfront.magellan.kotlinsample
 
-import android.content.Context
-import com.nhaarman.mockito_kotlin.argThat
-import com.nhaarman.mockito_kotlin.inOrder
+import com.nhaarman.mockito_kotlin.atLeastOnce
 import com.nhaarman.mockito_kotlin.verify
-import com.wealthfront.magellan.kotlinsample.data.Note
 import com.wealthfront.magellan.kotlinsample.data.SectionItem
-import io.kotlintest.mock.mock
 import io.kotlintest.specs.StringSpec
-import net.idik.lib.slimadapter.SlimAdapter
-import org.junit.Assert.*
 
-class NotesScreenTest : StringSpec() {
-    lateinit var notes: List<Note>
-    val ctx : Context = mock()
+/** Tests for [NotesScreen] **/
+class NotesScreenTest : StringSpec() { init {
+    val notes = fetchNotes()
+    val adapter = mockAdapter
 
-    init {
-        val adapter = mock<SlimAdapter>()
-        val screen = NotesScreen().mockWith(adapter)
+    val screen = NotesScreen()
+    screen.setupForTests(TestNotes(adapter), mockNavigator, mockActivity)
 
-        App.repository.getNotes { notes = it }
-
-        "First display a loading message" {
-            verify(adapter).updateData(argThat { size == 1 && first() is SectionItem })
-        }
-
-        "Then the notes" {
-            verify(adapter).updateData(notes)
-        }
-
-        "Can add a note" {
-            screen.addNote()
-            verify(screen.navigator).goTo(AddNoteScreen())
-        }
+    "Display loading message then the notes" {
+        verify(adapter, atLeastOnce()).updateData(SectionItem.LoadingList)
+        verify(adapter, atLeastOnce()).updateData(notes)
     }
+
+    "Can add a note" {
+        screen.display?.onAddNote?.invoke()
+        verify(screen.navigator).goTo(AddNoteScreen())
+    }
+}
 
 }

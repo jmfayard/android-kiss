@@ -1,40 +1,20 @@
 package com.wealthfront.magellan.kotlinsample
 
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
+import android.app.Activity
+import android.content.Context
+import com.wealthfront.magellan.Navigator
+import com.wealthfront.magellan.kotlinsample.data.Note
+import com.wealthfront.magellan.kotlinsample.data.NotesServiceApiImpl
 import net.idik.lib.slimadapter.SlimAdapter
 
+val mockNavigator: Navigator get() = io.kotlintest.mock.mock()
+val mockActivity: Activity get() = io.kotlintest.mock.mock()
+val mockContext: Context get() = io.kotlintest.mock.mock()
+val mockAdapter: SlimAdapter = io.kotlintest.mock.mock()
 
-fun NoteDetailScreen.mockWith(
-        title: String = "",
-        description: String = ""
-): NoteDetailScreen = apply {
-    navigator = mock()
-    view = mock<NoteDetailView> {
-        on(NoteDetailView::title) doReturn title
-        on(NoteDetailView::description) doReturn description
-    }
-    onShow(mock())
+
+fun fetchNotes(): List<Note> {
+    return NotesServiceApiImpl.NOTES_SERVICE_DATA.values.toList()
 }
 
 
-fun AddNoteScreen.mockWith(
-        title: String = "",
-        description: String = ""
-): AddNoteScreen = apply {
-    navigator = mock()
-    view = mock<AddNoteView> {
-        on(AddNoteView::title) doReturn title
-        on(AddNoteView::description) doReturn description
-        on(AddNoteView::focus) doReturn {}
-    }
-    onShow(mock())
-}
-
-fun NotesScreen.mockWith(adapter: SlimAdapter): NotesScreen = apply {
-    navigator = mock()
-    view = mock<NotesView>() {
-        on(NotesView::slimAdapter) doReturn adapter
-    }
-    onShow(mock())
-}
