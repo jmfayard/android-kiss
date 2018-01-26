@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.2.0'
+    ext.kotlin_version = '1.2.21'
 
     repositories {
         google()
@@ -8,6 +8,8 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
+
+        /**  $ ./gradlew dependencyUpdates  **/
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -22,9 +24,8 @@ apply plugin: 'kotlin-android'
 def versions = [
         "constraint": "1.0.2",
         "espresso": "3.0.1",
-        "jacoco": "0.7.9",
         "junit": "4.12",
-        "KotlinAndroidViewBindings": "0.11",
+        "KotlinAndroidViewBindings": "0.12",
         "kotlintest" : "2.0.7",
         "magellan": "1.0.0",
         "slimadapter" : "2.1.2",
