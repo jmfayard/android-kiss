@@ -7,8 +7,8 @@ pluginManagement {
 
     resolutionStrategy {
         eachPlugin {
-            def plugin = requested.id.id
-            def module = Config.pluginsResolution.get(plugin)
+            val plugin = requested.id.id
+            val module = Config.pluginsResolution.get(plugin)
             if (module != null) {
                 useModule(module)
             } else {

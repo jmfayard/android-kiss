@@ -8,7 +8,7 @@ plugins {
 repositories {
     google()
     jcenter()
-    maven { url "https://jitpack.io" }
+    maven("https://jitpack.io")
 }
 configurations.all {
     resolutionStrategy {
@@ -20,25 +20,20 @@ configurations.all {
 
 android {
 
-    compileSdkVersion Config.compileSdkVersion
+    compileSdkVersion(Config.compileSdkVersion)
 
     defaultConfig {
-        minSdkVersion Config.minSdkVersion
-        targetSdkVersion Config.targetSdkVersion
-        versionCode Config.versionCode
-        versionName Config.versionName
-        applicationId Config.applicationId
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
-    }
-
-    sourceSets {
-        main.java.srcDirs += "src/main/kotlin"
-        test.java.srcDirs += "src/test/kotlin"
+        minSdkVersion(Config.minSdkVersion)
+        targetSdkVersion(Config.targetSdkVersion)
+        versionCode = Config.versionCode
+        versionName  = Config.versionName
+        applicationId = Config.applicationId
+        testInstrumentationRunner ="android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
     }
 
     packagingOptions {
-        exclude "LICENSE.txt"
+        exclude("LICENSE.txt")
     }
 }
 
@@ -81,14 +76,14 @@ dependencies {
 
 
 
-buildScan {
-    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
-    setTermsOfServiceAgree("yes")
-    publishAlways()
-}
+//buildScan {
+//    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
+//    setTermsOfServiceAgree("yes")
+//    publishAlways()
+//}
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-    kotlinOptions {
-        freeCompilerArgs = ["-Xjsr305=strict"]
-    }
-}
+//tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+//    kotlinOptions {
+//        freeCompilerArgs = ["-Xjsr305=strict"]
+//    }
+//}
