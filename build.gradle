@@ -43,14 +43,14 @@ repositories {
 
 android {
 
-    compileSdkVersion 27
+    compileSdkVersion Config.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0.0"
-        applicationId "com.wealthfront.magellan.kotlinsample"
+        minSdkVersion Config.minSdkVersion
+        targetSdkVersion Config.targetSdkVersion
+        versionCode Config.versionCode
+        versionName Config.versionName
+        applicationId Config.applicationId
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
