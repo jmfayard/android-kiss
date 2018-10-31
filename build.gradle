@@ -1,21 +1,19 @@
 buildscript {
-    ext.kotlin_version = '1.2.21'
+    ext.kotlin_version = '1.2.71'
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-
-        /**  $ ./gradlew dependencyUpdates  **/
+        classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 plugins {
     id 'com.gradle.build-scan' version '1.10.2'
-    id 'com.github.ben-manes.versions' version '0.17.0'
+    id("jmfayard.github.io.gradle-kotlin-dsl-libs") version "0.2.6"  // $ ./gradlew syncLibs
 }
 apply plugin: "com.android.application"
 apply plugin: 'kotlin-android'
@@ -79,7 +77,7 @@ dependencies {
 
 
     // Kotlin
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
 
     // Google Libs
     compile "com.android.support:support-v4:${versions.support}"
