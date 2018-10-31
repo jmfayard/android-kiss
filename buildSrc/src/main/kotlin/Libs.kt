@@ -21,6 +21,16 @@ object Libs {
             "com.android.support.test.espresso:espresso-core:" + Versions.com_android_support_test_espresso
 
     /**
+     * [rules website](https://developer.android.com/testing) */
+    const val com_android_support_test_rules: String =
+            "com.android.support.test:rules:" + Versions.com_android_support_test
+
+    /**
+     * [runner website](https://developer.android.com/testing) */
+    const val com_android_support_test_runner: String =
+            "com.android.support.test:runner:" + Versions.com_android_support_test
+
+    /**
      * [appcompat-v7 website](http://developer.android.com/tools/extras/support-library.html) */
     const val appcompat_v7: String = "com.android.support:appcompat-v7:" + Versions.appcompat_v7
 
@@ -41,6 +51,16 @@ object Libs {
     /**
      * [preference-v7 website](http://developer.android.com/tools/extras/support-library.html) */
     const val preference_v7: String = "com.android.support:preference-v7:" + Versions.preference_v7
+
+    /**
+     * [recyclerview-v7 website](http://developer.android.com/tools/extras/support-library.html) */
+    const val recyclerview_v7: String =
+            "com.android.support:recyclerview-v7:" + Versions.recyclerview_v7
+
+    /**
+     * [support-core-utils website](http://developer.android.com/tools/extras/support-library.html) */
+    const val support_core_utils: String =
+            "com.android.support:support-core-utils:" + Versions.support_core_utils
 
     /**
      * [support-v4 website](http://developer.android.com/tools/extras/support-library.html) */

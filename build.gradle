@@ -12,7 +12,7 @@ buildscript {
     }
 }
 plugins {
-    id("com.gradle.build-scan") version "1.10.2"
+    id("com.gradle.build-scan") version "1.16"
     id("jmfayard.github.io.gradle-kotlin-dsl-libs") version "0.2.6"  // $ ./gradlew syncLibs
 }
 apply plugin: "com.android.application"
@@ -70,6 +70,8 @@ dependencies {
     implementation(Libs.multidex)
     implementation(Libs.timber)
     implementation(Libs.slimadapter)
+    implementation(Libs.support_core_utils)
+    implementation(Libs.recyclerview_v7)
     compileOnly(Libs.jsr305)
     testCompileOnly(Libs.jsr305)
     testImplementation(Libs.kotlintest)
@@ -80,6 +82,8 @@ dependencies {
     androidTestImplementation(Libs.kotlintest)
     androidTestImplementation(Libs.espresso_core)
     androidTestImplementation(Libs.espresso_contrib)
+    androidTestImplementation(Libs.com_android_support_test_rules)
+    androidTestImplementation(Libs.com_android_support_test_runner)
 
 }
 
@@ -94,11 +98,9 @@ configurations.all {
 
 
 buildScan {
-// Uncomment the lines below to agree to the Terms of Service.
-    licenseAgreementUrl = "https://gradle.com/terms-of-service"
-    licenseAgree = "yes"
-    tag "SAMPLE"
-    link "GitHub", "https://github.com/gradle/gradle-build-scan-quickstart"
+    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
+    setTermsOfServiceAgree("yes")
+    publishAlways()
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
