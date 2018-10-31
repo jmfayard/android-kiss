@@ -1,32 +1,22 @@
-buildscript {
-    ext.kotlin_version = "1.2.71"
-
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath "com.android.tools.build:gradle:3.2.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
 plugins {
+    id("com.android.application")
+    id("kotlin-android")
     id("com.gradle.build-scan") version "1.16"
     id("jmfayard.github.io.gradle-kotlin-dsl-libs") version "0.2.6"  // $ ./gradlew syncLibs
 }
-apply plugin: "com.android.application"
-apply plugin: "kotlin-android"
-
-
 
 repositories {
     google()
     jcenter()
     maven { url "https://jitpack.io" }
-
 }
-
+configurations.all {
+    resolutionStrategy {
+        for (version in Config.forceDependencyVersions) {
+            force(version)
+        }
+    }
+}
 
 android {
 
@@ -88,13 +78,7 @@ dependencies {
 }
 
 
-configurations.all {
-    resolutionStrategy {
-        for (version in Config.forceDependencyVersions) {
-            force(version)
-        }
-    }
-}
+
 
 
 buildScan {

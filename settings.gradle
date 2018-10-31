@@ -1,0 +1,20 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        jcenter()
+        google()
+    }
+
+    resolutionStrategy {
+        eachPlugin {
+            def plugin = requested.id.id
+            def module = Config.pluginsResolution.get(plugin)
+            if (module != null) {
+                useModule(module)
+            } else {
+                println("No resolutionStrategy for plugin=$plugin")
+            }
+        }
+    }
+}
+rootProject.name = "android-kotlin-magellan"

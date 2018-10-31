@@ -11,4 +11,9 @@ object Config {
             Libs.design, Libs.percent, Libs.kotlin_reflect, Libs.kotlin_test, Libs.kotlin_stdlib,
             Libs.recyclerview_v7, Libs.support_core_utils
     )
+
+    val pluginsResolution : Map<String, String> = mapOf(
+            "com.android.application" to Libs.com_android_tools_build_gradle,
+            "kotlin-android" to Libs.kotlin_gradle_plugin
+    )
 }
