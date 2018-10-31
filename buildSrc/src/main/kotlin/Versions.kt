@@ -57,7 +57,7 @@ object Versions {
 
     const val slimadapter: String = "2.1.2" 
 
-    const val org_jetbrains_kotlin: String = "1.2.71" //available: "1.3.0" 
+    const val org_jetbrains_kotlin: String = "1.3.0"
 
     /**
      *
