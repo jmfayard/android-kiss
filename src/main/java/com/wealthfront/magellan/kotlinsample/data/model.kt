@@ -2,13 +2,14 @@ package com.wealthfront.magellan.kotlinsample.data
 
 import java.util.*
 
+interface ListItem
 
 data class Note(
         val id: String = UUID.randomUUID().toString(),
         val description: String,
         val title: String,
         val url: String? = null
-)
+): ListItem
 
 /**
  * Defines an interface to the service API that is used by this application. All data request should
@@ -37,8 +38,6 @@ interface NotesRepository {
 
 
 
-data class SectionItem(val title: String) {
-    companion object {
-        val LoadingList = listOf(SectionItem("Loading, please wait"))
-    }
-}
+data class SectionItem(val title: String): ListItem
+
+val LoadingList = listOf(SectionItem("Loading, please wait"))

@@ -1,24 +1,25 @@
 package com.wealthfront.magellan.kotlinsample
 
 import android.content.Context
+import android.widget.FrameLayout
+import com.wealthfront.magellan.kotlinsample.data.LoadingList
 import com.wealthfront.magellan.kotlinsample.data.Note
-import com.wealthfront.magellan.kotlinsample.data.SectionItem
 
 
-class NotesScreen : MagellanScreen<Notes>() {
-
-    override fun createView(context: Context): MagellanView<Notes> =
-            MagellanView(context, Notes.layout, MagellanView<Notes>::displayNotes)
-
-    override fun getTitle(context: Context?) = "Notes"
+class NotesScreen : MagellanScreen<Notes>(
+        R.layout.notes_screen, R.string.title_notes, FrameLayout::displayNotes
+) {
 
     public override fun onShow(context: Context?) {
         display?.onAddNote = { addNote() }
 
-        display?.slimAdapter?.updateData(SectionItem.LoadingList)
+        display?.setupRecyclerView { item ->
+            onItemClicked(item)
+        }
+        display?.updateRecyclerViewData(LoadingList)
 
         App.Companion.repository.getNotes { notes: List<Note> ->
-            display?.slimAdapter?.updateData(notes)
+            display?.updateRecyclerViewData(notes)
         }
     }
 

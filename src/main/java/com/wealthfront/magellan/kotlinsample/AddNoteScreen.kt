@@ -6,16 +6,15 @@ import com.wealthfront.magellan.kotlinsample.data.Note
 import java.util.*
 
 
-data class AddNoteScreen(val noteId: String? = null) : MagellanScreen<AddNote>() {
-
-    override fun createView(context: Context) = MagellanView(context, AddNote.layout, FrameLayout::displayAddNote)
+data class AddNoteScreen(val noteId: String? = null) : MagellanScreen<AddNote>(
+        screenLayout = R.layout.addnote_screen,
+        screenTitle = if (noteId != null) R.string.title_editnote else R.string.title_addnote,
+        screenSetup = FrameLayout::displayAddNote
+) {
 
     val isEditMode = noteId != null
 
-    override fun getTitle(context: Context?): String =
-            if (isEditMode) "Edit Note" else "Add Note"
-
-    override public fun onShow(context: Context?) {
+    override fun onShow(context: Context?) {
         if (isEditMode) {
             showExistingNote()
         }

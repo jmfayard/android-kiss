@@ -4,7 +4,7 @@ import android.widget.FrameLayout
 import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
 import com.marcinmoskala.kotlinandroidviewbindings.bindToText
 
-interface NoteDetail {
+interface NoteDetail : IDisplay {
     var title: String
     var description: String
     var onEditNote: UiCallback

@@ -7,7 +7,7 @@ import com.marcinmoskala.kotlinandroidviewbindings.bindToEditText
 import com.marcinmoskala.kotlinandroidviewbindings.bindToRequestFocus
 
 
-interface AddNote {
+interface AddNote : IDisplay {
     var onSubmit: UiCallback
     var title: String
     var description: String

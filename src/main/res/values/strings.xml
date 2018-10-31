@@ -14,4 +14,8 @@
   <string name="no_data">No data</string>
   <string name="loading">LOADING</string>
 
+  <string name="title_notedetails">Note Detail</string>
+  <string name="title_addnote">Add Note</string>
+  <string name="title_editnote">Edit Note</string>
+  <string name="title_notes">Notes</string>
 </resources>
