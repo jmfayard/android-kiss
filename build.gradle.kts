@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -74,16 +76,14 @@ dependencies {
 
 
 
+buildScan {
+    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
+    setTermsOfServiceAgree("yes")
+    publishAlways()
+}
 
-
-//buildScan {
-//    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
-//    setTermsOfServiceAgree("yes")
-//    publishAlways()
-//}
-
-//tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-//    kotlinOptions {
-//        freeCompilerArgs = ["-Xjsr305=strict"]
-//    }
-//}
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+    }
+}
