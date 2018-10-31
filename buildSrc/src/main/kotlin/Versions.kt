@@ -41,7 +41,7 @@ object Versions {
 
     const val jsr305: String = "3.0.2" 
 
-    const val com_gradle_build_scan_gradle_plugin: String = "1.15.1" //available: "2.0.1" 
+    const val com_gradle_build_scan_gradle_plugin: String = "1.16" //available: "2.0.1" 
 
     const val timber: String = "4.7.1" 
 
@@ -57,7 +57,9 @@ object Versions {
 
     const val slimadapter: String = "2.1.2" 
 
-    const val org_jetbrains_kotlin: String = "1.3.0"
+    const val org_jetbrains_kotlin: String = "1.3.0" 
+
+    const val org_jetbrains_kotlinx: String = "1.0.0" 
 
     /**
      *

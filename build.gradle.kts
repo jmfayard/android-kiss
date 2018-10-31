@@ -59,6 +59,8 @@ dependencies {
     implementation(Libs.slimadapter)
     implementation(Libs.support_core_utils)
     implementation(Libs.recyclerview_v7)
+    implementation(Libs.kotlinx_coroutines_core)
+    implementation(Libs.kotlinx_coroutines_android)
     compileOnly(Libs.jsr305)
     testCompileOnly(Libs.jsr305)
     testImplementation(Libs.kotlintest)

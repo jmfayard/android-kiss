@@ -4,9 +4,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.FrameLayout
 import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
-import com.wealthfront.magellan.kotlinsample.data.ListItem
-import com.wealthfront.magellan.kotlinsample.data.Note
-import com.wealthfront.magellan.kotlinsample.data.SectionItem
 import net.idik.lib.slimadapter.SlimAdapter
 
 interface Notes : IDisplay {
@@ -15,7 +12,19 @@ interface Notes : IDisplay {
     fun setupRecyclerView(onclick: (Note) -> Unit)
     fun updateRecyclerViewData(items: List<ListItem>)
 }
+class TestNotes: Notes {
+    override var onAddNote: UiCallback = {}
 
+    override fun setupRecyclerView(onclick: (Note) -> Unit) {
+    }
+
+    private lateinit var items: List<ListItem>
+
+    override fun updateRecyclerViewData(items: List<ListItem>) {
+        this.items = items
+    }
+
+}
 fun FrameLayout.displayNotes() = object : Notes {
 
     lateinit var slimAdapter: SlimAdapter

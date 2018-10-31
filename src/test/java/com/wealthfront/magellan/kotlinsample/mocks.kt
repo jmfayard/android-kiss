@@ -3,8 +3,6 @@ package com.wealthfront.magellan.kotlinsample
 import android.app.Activity
 import android.content.Context
 import com.wealthfront.magellan.Navigator
-import com.wealthfront.magellan.kotlinsample.data.Note
-import com.wealthfront.magellan.kotlinsample.data.NotesServiceApiImpl
 import net.idik.lib.slimadapter.SlimAdapter
 
 val mockNavigator: Navigator get() = io.kotlintest.mock.mock()

@@ -2,25 +2,30 @@ package com.wealthfront.magellan.kotlinsample
 
 import android.content.Context
 import android.widget.FrameLayout
-import com.wealthfront.magellan.kotlinsample.data.LoadingList
-import com.wealthfront.magellan.kotlinsample.data.Note
+import kotlinx.coroutines.launch
 
 
-class NotesScreen : MagellanScreen<Notes>(
+class NotesScreen(
+        val repository: NotesRepository = InMemoryRepository
+) : MagellanScreen<Notes>(
         R.layout.notes_screen, R.string.title_notes, FrameLayout::displayNotes
 ) {
 
-    public override fun onShow(context: Context?) {
-        display?.onAddNote = { addNote() }
+    public override fun onShow(context: Context) {
+        super.onShow(context)
+        setupUx()
 
-        display?.setupRecyclerView { item ->
-            onItemClicked(item)
-        }
-        display?.updateRecyclerViewData(LoadingList)
-
-        App.Companion.repository.getNotes { notes: List<Note> ->
+        launch {
+            display?.updateRecyclerViewData(LoadingList)
+            val notes = repository.getNotes()
             display?.updateRecyclerViewData(notes)
         }
+    }
+
+    private fun setupUx() {
+        display?.onAddNote = { addNote() }
+        display?.setupRecyclerView(this::onItemClicked)
+
     }
 
     fun addNote() = navigator.goTo(AddNoteScreen())
@@ -30,4 +35,3 @@ class NotesScreen : MagellanScreen<Notes>(
     }
 
 }
-

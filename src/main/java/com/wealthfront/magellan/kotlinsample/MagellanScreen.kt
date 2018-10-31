@@ -11,7 +11,11 @@ import com.wealthfront.magellan.DialogCreator
 import com.wealthfront.magellan.NavigationType
 import com.wealthfront.magellan.Navigator
 import com.wealthfront.magellan.Screen
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import timber.log.Timber
+import kotlin.coroutines.CoroutineContext
 
 
 /** Base class for all our screens. Used a [MagellanView] as its view. **/
@@ -19,7 +23,24 @@ abstract class MagellanScreen<Display : IDisplay>(
         @LayoutRes val screenLayout: Int,
         @StringRes val screenTitle: Int,
         val screenSetup: MagellanView<Display>.() -> Display
-) : Screen<MagellanView<Display>>() {
+) : Screen<MagellanView<Display>>(), CoroutineScope {
+
+
+    @CallSuper
+    override fun onShow(context: Context) {
+        screenJob = Job()
+    }
+
+    @CallSuper
+    override fun onHide(context: Context?) {
+        screenJob.cancel()
+    }
+
+    private lateinit var screenJob: Job
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + screenJob
+
 
     val appCtx: Context get() = App.instance.applicationContext
 

@@ -140,4 +140,14 @@ object Libs {
      * [kotlin-test website](https://kotlinlang.org/) */
     const val kotlin_test: String =
             "org.jetbrains.kotlin:kotlin-test:" + Versions.org_jetbrains_kotlin
+
+    /**
+     * [kotlinx-coroutines-android website](https://github.com/Kotlin/kotlinx.coroutines) */
+    const val kotlinx_coroutines_android: String =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:" + Versions.org_jetbrains_kotlinx
+
+    /**
+     * [kotlinx-coroutines-core website](https://github.com/Kotlin/kotlinx.coroutines) */
+    const val kotlinx_coroutines_core: String =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core:" + Versions.org_jetbrains_kotlinx
 }
