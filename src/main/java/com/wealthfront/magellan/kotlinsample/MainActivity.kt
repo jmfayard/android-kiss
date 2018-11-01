@@ -1,7 +1,6 @@
 package com.wealthfront.magellan.kotlinsample
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import com.wealthfront.magellan.NavigationType
 import com.wealthfront.magellan.Navigator
@@ -10,6 +9,7 @@ import com.wealthfront.magellan.ScreenLifecycleListener
 import com.wealthfront.magellan.support.SingleActivity
 import com.wealthfront.magellan.transitions.DefaultTransition
 import com.wealthfront.magellan.transitions.NoAnimationTransition
+import timber.log.Timber.i
 
 class MainActivity : SingleActivity() {
 
@@ -25,7 +25,6 @@ class MainActivity : SingleActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             android.R.id.home -> {
-                getNavigator().currentScreen().getView().hideKeyboard()
                 getNavigator().goBackToRoot(NavigationType.GO)
             }
             else -> return super.onOptionsItemSelected(item)
@@ -46,7 +45,7 @@ class MainActivity : SingleActivity() {
     val LifeCycle = object : ScreenLifecycleListener {
         override fun onShow(screen: Screen<*>) {
             val title = screen.getTitle(applicationContext)
-            Log.i("Navigator", "onShow(screen = '$title')")
+            i("onShow(screen = '$title')")
 
             with(supportActionBar!!) {
                 val firstScreen = screen is NotesScreen
@@ -57,7 +56,7 @@ class MainActivity : SingleActivity() {
 
         override fun onHide(screen: Screen<*>) {
             val title = screen.getTitle(applicationContext)
-            Log.i("Navigator", "onHide(screen = '$title')")
+            i("onHide(screen = '$title')")
         }
     }
 }

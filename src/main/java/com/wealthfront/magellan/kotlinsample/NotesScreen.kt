@@ -5,6 +5,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.FrameLayout
 import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.idik.lib.slimadapter.SlimAdapter
 

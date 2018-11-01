@@ -28,7 +28,7 @@ class NoteDetailScreen(
     fun fetchAndDisplayNote() = launch {
         val note = repository.getNote(noteId)
         if (note == null) {
-            toast("ERROR, cannot find note $noteId")
+            snackbar("ERROR, cannot find note $noteId")
             navigator.goBack()
         } else {
             display?.title = note.title

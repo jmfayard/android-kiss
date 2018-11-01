@@ -10,18 +10,23 @@ import android.support.annotation.IdRes
 import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
 import android.support.annotation.VisibleForTesting
+import android.support.design.widget.CoordinatorLayout
+import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import com.wealthfront.magellan.BaseScreenView
 import com.wealthfront.magellan.DialogCreator
 import com.wealthfront.magellan.NavigationType
 import com.wealthfront.magellan.Navigator
 import com.wealthfront.magellan.Screen
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
@@ -57,8 +62,13 @@ abstract class MagellanScreen<Display : IDisplay>(
 
     private lateinit var screenJob: Job
 
+    val LoggingExceptionHandler = CoroutineExceptionHandler { _, t ->
+        Timber.e(t)
+        toast(t.toString())
+    }
+
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + screenJob
+        get() = Dispatchers.Main + LoggingExceptionHandler + screenJob
 
     val appCtx: Context get() = App.instance.applicationContext
 
@@ -73,13 +83,6 @@ abstract class MagellanScreen<Display : IDisplay>(
     override fun createView(context: Context) =
         MagellanView(context, screenLayout, screenSetup)
 
-    /** i18n(R.String.TAG_LOST) instead of cumbersome and unsafe activity.getString(R.String.blahblah) **/
-    fun i18n(@StringRes resId: Int, vararg formatArgs: String): String =
-        appCtx.getString(resId, *formatArgs)
-
-    @ColorInt
-    fun color(@ColorRes colorId: Int): Int =
-        ContextCompat.getColor(appCtx, colorId)
 
     /** A scren is either associated to a [MainActivity] or no activity if in the background **/
     fun mainActivity(): MainActivity? =
@@ -130,4 +133,78 @@ abstract class MagellanScreen<Display : IDisplay>(
 
     public override fun onUpdateMenu(menu: Menu) {
     }
+
+    private var snackBar: Snackbar? = null
+
+    fun snackbar(
+        message: String,
+        short: Boolean = false,
+        isIndefinite: Boolean = false,
+        block: Snackbar.() -> Unit = {}
+    ) {
+        Timber.i("snackbar($message)")
+        val coordinatorLayout =
+            navigator.currentScreen().getActivity()?.findViewById<CoordinatorLayout>(R.id.coordinatorLayout) ?: run {
+                Timber.w("Skipping showSnackBarAndAllowToRetry(): activity not found")
+                return
+            }
+        val duration = when {
+            isIndefinite -> Snackbar.LENGTH_INDEFINITE
+            short -> Snackbar.LENGTH_SHORT
+            else -> Snackbar.LENGTH_LONG // default
+        }
+
+        snackBar = Snackbar.make(coordinatorLayout, message, duration)
+            .apply {
+                block()
+                show()
+            }
+    }
+
+
+    fun toast(message: String, long: Boolean = false) {
+        Timber.i("toast($message)")
+        if (isRunningTest) return
+        val length = if (long) Toast.LENGTH_LONG else Toast.LENGTH_SHORT
+        if (message.isNotBlank()) {
+            // use the applicationContext so that the toast is shown even if the screen is not in the foreground
+            launch {
+                Toast.makeText(appCtx, message, length).show()
+            }
+        }
+    }
+
+    fun toast(@StringRes message: Int, long: Boolean = false, vararg formatArgs: Any) {
+        val i18nMessage: String = appCtx.getString(message, *formatArgs)
+        toast(i18nMessage, long)
+    }
+
+
+    /** i18n(R.String.TAG_LOST) instead of cumbersome and unsafe activity.getString(R.String.blahblah) **/
+    fun i18n(@StringRes resId: Int, vararg formatArgs: String): String =
+        appCtx.getString(resId, *formatArgs)
+
+    @ColorInt
+    fun color(@ColorRes colorId: Int): Int =
+        ContextCompat.getColor(appCtx, colorId)
 }
+
+
+
+
+val isRunningTest: Boolean by lazy {
+    //    val firebaseTestLab = "true" == Settings.System.getString(App.instance.contentResolver, "firebase.test.lab")
+    classExists("io.kotlintest.specs.StringSpec")
+}
+
+// https://stackoverflow.com/questions/28550370/how-to-detect-whether-android-app-is-running-ui-test-with-espresso
+fun classExists(fullyQualifiedName: String): Boolean =
+    try {
+        Class.forName(fullyQualifiedName)
+        true
+    } catch (e: ClassNotFoundException) {
+        false
+    } catch (e: Throwable) {
+        Timber.e(e, "Unexcted error in classExists()")
+        false
+    }

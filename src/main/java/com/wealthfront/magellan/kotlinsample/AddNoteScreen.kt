@@ -34,11 +34,12 @@ class AddNoteScreen(
         }
         display?.focus()
         display?.onSubmit = this::onSubmit
+        snackbar("Hello world!!")
     }
 
     fun onSubmit() {
         launch {
-            view.hideKeyboard()
+            hideSoftKeyboard(R.id.add_note_title)
             repository.saveNote(updatedNote())
             navigator.goBack()
         }
