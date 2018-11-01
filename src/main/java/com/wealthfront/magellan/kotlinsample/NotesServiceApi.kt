@@ -9,9 +9,9 @@ import kotlinx.coroutines.delay
  */
 interface NotesServiceApi {
 
-    suspend fun getAllNotes() : List<Note>
+    suspend fun getAllNotes(): List<Note>
 
-    suspend fun getNote(noteId: String) : Note?
+    suspend fun getNote(noteId: String): Note?
 
     suspend fun saveNote(note: Note)
 }

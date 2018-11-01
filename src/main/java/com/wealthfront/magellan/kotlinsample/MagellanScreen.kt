@@ -1,5 +1,6 @@
 package com.wealthfront.magellan.kotlinsample
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.support.annotation.*
@@ -7,16 +8,23 @@ import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import com.wealthfront.magellan.DialogCreator
-import com.wealthfront.magellan.NavigationType
-import com.wealthfront.magellan.Navigator
-import com.wealthfront.magellan.Screen
+import com.wealthfront.magellan.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
+@SuppressLint("ViewConstructor")
+open class MagellanView<Display: IDisplay>(context: Context, @LayoutRes val layout: Int, setup: MagellanView<Display>.() -> Display)
+    : BaseScreenView<MagellanScreen<Display>>(context) {
+    val display: Display
+
+    init {
+        inflate(context, layout, this)
+        display = setup()
+    }
+}
 
 /** Base class for all our screens. Used a [MagellanView] as its view. **/
 abstract class MagellanScreen<Display : IDisplay>(

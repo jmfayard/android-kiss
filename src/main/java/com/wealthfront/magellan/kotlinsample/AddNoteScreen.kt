@@ -2,11 +2,22 @@ package com.wealthfront.magellan.kotlinsample
 
 import android.content.Context
 import android.widget.FrameLayout
+import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
+import com.marcinmoskala.kotlinandroidviewbindings.bindToEditText
+import com.marcinmoskala.kotlinandroidviewbindings.bindToRequestFocus
 import kotlinx.coroutines.launch
 import java.util.*
 
+interface AddNote : IDisplay {
+    var onSubmit: UiCallback
+    var title: String
+    var description: String
+    val focus: UiCallback
+    fun focus() = focus.invoke()
 
-data class AddNoteScreen(
+}
+
+class AddNoteScreen(
         val noteId: String? = null,
         val repository: NotesRepository = InMemoryRepository
 ) : MagellanScreen<AddNote>(
@@ -54,3 +65,14 @@ data class AddNoteScreen(
 }
 
 
+fun FrameLayout.displayAddNote() = object : AddNote {
+
+    override var onSubmit: UiCallback by bindToClick(R.id.add_note_save)
+
+    override var title: String by bindToEditText(R.id.add_note_title)
+
+    override var description: String by bindToEditText(R.id.add_note_description)
+
+    override val focus: UiCallback by bindToRequestFocus(R.id.add_note_title)
+
+}

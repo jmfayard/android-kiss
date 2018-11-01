@@ -63,19 +63,12 @@ interface AddNote {
     var onSubmit: UiCallback
 }
 
-class AddNoteScreen() : MagellanScreen<AddNote>() {
-
-    override fun createView(context: Context) : MagellanView<AddNote>
-        = MagellanView(context, R.layout.addnote_screen, FrameLayout::displayAddNote)
-
-    override public fun onShow(context: Context?) {
-        display?.title = "Set an initial title"
-        display?.description = "Set an initial description"
-        display?.onSubmit = {
-            doSomethingWith(display?.title, display?.description)
-        }
-    }
-}
+class AddNoteScreen(val noteId: String? = null)
+: MagellanScreen<AddNote>(
+        screenLayout = R.layout.addnote_screen,
+        screenTitle = if (noteId != null) R.string.title_editnote else R.string.title_addnote,
+        screenSetup = FrameLayout::displayAddNote
+)
 ```
 
 
@@ -106,22 +99,6 @@ data class TestAddNote(
 Unit Tests
 ----------
 
-Using the above strategy, unit testing is super simple because we rely very little on mocking (except for getNavigator() and getActivity())
-
-Instead we have our `data class TestAddNote` that is trivial to test
-
-```
-
-@Test fun editExistingNote() {
-    val note = notes.first()
-    val screen = AddNoteScreen(noteId = note.id)
-    screen.setupForTests(AddNote.TEST, mockNavigator, mockActivity)
-
-    val display = requireNotNull(screen.display)
-    display.title shouldBe note.title
-    display.description shouldBe note.description
-}
-```
 
 
 See the [Unit Tests](https://github.com/jmfayard/android-kotlin-magellan/tree/master/src/test/kotlin/com/wealthfront/magellan/kotlinsample)
