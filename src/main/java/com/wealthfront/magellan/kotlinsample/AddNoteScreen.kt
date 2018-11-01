@@ -34,7 +34,6 @@ class AddNoteScreen(
         }
         display?.focus()
         display?.onSubmit = this::onSubmit
-        snackbar("Hello world!!")
     }
 
     fun onSubmit() {
