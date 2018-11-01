@@ -5,6 +5,7 @@ plugins {
     id("kotlin-android")
     id("com.gradle.build-scan") version "1.16"
     id("jmfayard.github.io.gradle-kotlin-dsl-libs") version "0.2.6"  // $ ./gradlew syncLibs
+    id("org.jlleitschuh.gradle.ktlint-idea") version "6.2.1"
 }
 
 repositories {

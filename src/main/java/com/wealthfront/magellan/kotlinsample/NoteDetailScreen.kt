@@ -13,10 +13,10 @@ interface NoteDetail : IDisplay {
 }
 
 class NoteDetailScreen(
-        val noteId: String,
-        val repository: NotesRepository = InMemoryRepository
+    val noteId: String,
+    val repository: NotesRepository = InMemoryRepository
 ) : MagellanScreen<NoteDetail>(
-        R.layout.notedetail_screen, R.string.title_notedetails, FrameLayout::displayNoteDetail
+    R.layout.notedetail_screen, R.string.title_notedetails, FrameLayout::displayNoteDetail
 ) {
 
     override fun onShow(context: Context) {
@@ -38,9 +38,6 @@ class NoteDetailScreen(
 
     fun onEditNote() = navigator.goTo(AddNoteScreen(noteId))
 }
-
-
-
 
 fun FrameLayout.displayNoteDetail() = object : NoteDetail {
     override var title: String by bindToText(R.id.note_detail_title)

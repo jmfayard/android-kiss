@@ -1,6 +1,5 @@
 package com.wealthfront.magellan.kotlinsample
 
-
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
@@ -57,6 +56,4 @@ class MainActivityTest {
 
         }
     }
-
-
 }

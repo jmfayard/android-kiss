@@ -6,7 +6,7 @@ import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
 import com.marcinmoskala.kotlinandroidviewbindings.bindToEditText
 import com.marcinmoskala.kotlinandroidviewbindings.bindToRequestFocus
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.UUID
 
 interface AddNote : IDisplay {
     var onSubmit: UiCallback
@@ -14,23 +14,24 @@ interface AddNote : IDisplay {
     var description: String
     val focus: UiCallback
     fun focus() = focus.invoke()
-
 }
 
 class AddNoteScreen(
-        val noteId: String? = null,
-        val repository: NotesRepository = InMemoryRepository
+    val noteId: String? = null,
+    val repository: NotesRepository = InMemoryRepository
 ) : MagellanScreen<AddNote>(
-        screenLayout = R.layout.addnote_screen,
-        screenTitle = if (noteId != null) R.string.title_editnote else R.string.title_addnote,
-        screenSetup = FrameLayout::displayAddNote
+    screenLayout = R.layout.addnote_screen,
+    screenTitle = if (noteId != null) R.string.title_editnote else R.string.title_addnote,
+    screenSetup = FrameLayout::displayAddNote
 ) {
 
     val isEditMode = noteId != null
 
     override fun onShow(context: Context) {
         super.onShow(context)
-        if (isEditMode) { showExistingNote() }
+        if (isEditMode) {
+            showExistingNote()
+        }
         display?.focus()
         display?.onSubmit = this::onSubmit
     }
@@ -64,7 +65,6 @@ class AddNoteScreen(
     }
 }
 
-
 fun FrameLayout.displayAddNote() = object : AddNote {
 
     override var onSubmit: UiCallback by bindToClick(R.id.add_note_save)
@@ -74,5 +74,4 @@ fun FrameLayout.displayAddNote() = object : AddNote {
     override var description: String by bindToEditText(R.id.add_note_description)
 
     override val focus: UiCallback by bindToRequestFocus(R.id.add_note_title)
-
 }

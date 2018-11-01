@@ -15,11 +15,10 @@ interface Notes : IDisplay {
     fun updateRecyclerViewData(items: List<ListItem>)
 }
 
-
 class NotesScreen(
-        val repository: NotesRepository = InMemoryRepository
+    val repository: NotesRepository = InMemoryRepository
 ) : MagellanScreen<Notes>(
-        R.layout.notes_screen, R.string.title_notes, FrameLayout::displayNotes
+    R.layout.notes_screen, R.string.title_notes, FrameLayout::displayNotes
 ) {
 
     public override fun onShow(context: Context) {
@@ -36,7 +35,6 @@ class NotesScreen(
     private fun setupUx() {
         display?.onAddNote = { addNote() }
         display?.setupRecyclerView(this::onItemClicked)
-
     }
 
     fun addNote() = navigator.goTo(AddNoteScreen())
@@ -44,9 +42,7 @@ class NotesScreen(
     fun onItemClicked(item: Note) {
         navigator.goTo(NoteDetailScreen(item.id))
     }
-
 }
-
 
 fun FrameLayout.displayNotes() = object : Notes {
 
@@ -65,21 +61,20 @@ fun FrameLayout.displayNotes() = object : Notes {
         slimAdapter.updateData(items)
     }
 
-
     val recycler: RecyclerView get() = findViewById(R.id.recycler)
 
     fun createAdapter(onclick: (Note) -> Unit): SlimAdapter {
         val slimAdapter = SlimAdapter.create()
-                .register(R.layout.home_item_section) { data: SectionItem, injector ->
-                    injector.text(R.id.home_item_title, data.title)
-                }
-                .register(R.layout.home_item_card) { data: Note, injector ->
-                    injector.text(R.id.home_item_title, data.title)
-                            .text(R.id.home_item_description, data.description)
-                            .clicked(R.id.card_view) {
-                                onclick(data)
-                            }
-                }.attachTo(recycler)
+            .register(R.layout.home_item_section) { data: SectionItem, injector ->
+                injector.text(R.id.home_item_title, data.title)
+            }
+            .register(R.layout.home_item_card) { data: Note, injector ->
+                injector.text(R.id.home_item_title, data.title)
+                    .text(R.id.home_item_description, data.description)
+                    .clicked(R.id.card_view) {
+                        onclick(data)
+                    }
+            }.attachTo(recycler)
 
         with(recycler) {
             layoutManager = LinearLayoutManager(context)
@@ -88,5 +83,4 @@ fun FrameLayout.displayNotes() = object : Notes {
 
         return slimAdapter
     }
-
 }

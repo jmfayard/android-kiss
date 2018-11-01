@@ -5,7 +5,8 @@ import org.junit.Test
 
 class CoroutinesTest {
 
-    @Test fun dummy() {
-        2+2 shouldBe 4
+    @Test
+    fun dummy() {
+        2 + 2 shouldBe 4
     }
 }

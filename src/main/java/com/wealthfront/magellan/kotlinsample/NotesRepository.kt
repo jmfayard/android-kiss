@@ -2,7 +2,6 @@ package com.wealthfront.magellan.kotlinsample
 
 import kotlinx.coroutines.coroutineScope
 
-
 interface NotesRepository {
 
     suspend fun getNotes(): List<Note>
@@ -12,9 +11,7 @@ interface NotesRepository {
     suspend fun saveNote(note: Note)
 
     suspend fun refreshData()
-
 }
-
 
 object InMemoryRepository : NotesRepository {
     val api: NotesServiceApi = NotesServiceApiImpl
@@ -33,7 +30,6 @@ object InMemoryRepository : NotesRepository {
         api.getNote(noteId)
     }
 
-
     override suspend fun saveNote(note: Note) = coroutineScope {
         api.saveNote(note)
         refreshData()
@@ -42,5 +38,4 @@ object InMemoryRepository : NotesRepository {
     override suspend fun refreshData() {
         notes = null
     }
-
 }

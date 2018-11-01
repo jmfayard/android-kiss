@@ -11,9 +11,7 @@ import com.wealthfront.magellan.support.SingleActivity
 import com.wealthfront.magellan.transitions.DefaultTransition
 import com.wealthfront.magellan.transitions.NoAnimationTransition
 
-
 class MainActivity : SingleActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +21,6 @@ class MainActivity : SingleActivity() {
     override fun onDestroy() {
         super.onDestroy()
     }
-
-
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
@@ -40,9 +36,9 @@ class MainActivity : SingleActivity() {
     override fun createNavigator(): Navigator {
         val transition = if (isRunningTest) NoAnimationTransition() else DefaultTransition()
         val navigator = Navigator.withRoot(NotesScreen())
-                .transition(transition)
-                .loggingEnabled(true)
-                .build()
+            .transition(transition)
+            .loggingEnabled(true)
+            .build()
         navigator.addLifecycleListener(LifeCycle)
         return navigator
     }
@@ -64,8 +60,6 @@ class MainActivity : SingleActivity() {
             Log.i("Navigator", "onHide(screen = '$title')")
         }
     }
-
-
 }
 
 

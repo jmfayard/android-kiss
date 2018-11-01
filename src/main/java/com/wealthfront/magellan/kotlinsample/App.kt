@@ -18,6 +18,5 @@ class App : Application() {
         Timber.plant(Timber.DebugTree())
 
         MultiDex.install(this);
-
     }
 }

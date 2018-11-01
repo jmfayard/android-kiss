@@ -16,15 +16,22 @@ interface NotesServiceApi {
     suspend fun saveNote(note: Note)
 }
 
-
 /**
  * Implementation of the Notes Service API that adds a latency simulating network.
  */
 object NotesServiceApiImpl : NotesServiceApi {
     val NOTES = mutableListOf(
-            Note(description = "The simplest navigation library for Android.", title = "Magellan", url = "https://github.com/wealthfront/magellan"),
-            Note(description = "Statically typed programming language for modern multiplatform applications. 100% interoperable with Java™ and Android™.", title = "Kotlin", url = "http://kotlinlang.org/"),
-            Note(description = "Coroutines are awesome", title = "Kotlin Coroutines")
+        Note(
+            description = "The simplest navigation library for Android.",
+            title = "Magellan",
+            url = "https://github.com/wealthfront/magellan"
+        ),
+        Note(
+            description = "Statically typed programming language for modern multiplatform applications. 100% interoperable with Java™ and Android™.",
+            title = "Kotlin",
+            url = "http://kotlinlang.org/"
+        ),
+        Note(description = "Coroutines are awesome", title = "Kotlin Coroutines")
     )
     val NOTES_SERVICE_DATA: MutableMap<String, Note> = NOTES.associateBy { it.id }.toMutableMap()
 
@@ -42,5 +49,4 @@ object NotesServiceApiImpl : NotesServiceApi {
         delay(50)
         NOTES_SERVICE_DATA[note.id] = note
     }
-
 }

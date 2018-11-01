@@ -3,12 +3,22 @@ package com.wealthfront.magellan.kotlinsample
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.support.annotation.*
+import android.support.annotation.CallSuper
+import android.support.annotation.ColorInt
+import android.support.annotation.ColorRes
+import android.support.annotation.IdRes
+import android.support.annotation.LayoutRes
+import android.support.annotation.StringRes
+import android.support.annotation.VisibleForTesting
 import android.support.v4.content.ContextCompat
 import android.view.Menu
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import com.wealthfront.magellan.*
+import com.wealthfront.magellan.BaseScreenView
+import com.wealthfront.magellan.DialogCreator
+import com.wealthfront.magellan.NavigationType
+import com.wealthfront.magellan.Navigator
+import com.wealthfront.magellan.Screen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -16,8 +26,10 @@ import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
 @SuppressLint("ViewConstructor")
-open class MagellanView<Display: IDisplay>(context: Context, @LayoutRes val layout: Int, setup: MagellanView<Display>.() -> Display)
-    : BaseScreenView<MagellanScreen<Display>>(context) {
+open class MagellanView<Display : IDisplay>(
+    context: Context, @LayoutRes val layout: Int,
+    setup: MagellanView<Display>.() -> Display
+) : BaseScreenView<MagellanScreen<Display>>(context) {
     val display: Display
 
     init {
@@ -28,11 +40,10 @@ open class MagellanView<Display: IDisplay>(context: Context, @LayoutRes val layo
 
 /** Base class for all our screens. Used a [MagellanView] as its view. **/
 abstract class MagellanScreen<Display : IDisplay>(
-        @LayoutRes val screenLayout: Int,
-        @StringRes val screenTitle: Int,
-        val screenSetup: MagellanView<Display>.() -> Display
+    @LayoutRes val screenLayout: Int,
+    @StringRes val screenTitle: Int,
+    val screenSetup: MagellanView<Display>.() -> Display
 ) : Screen<MagellanView<Display>>(), CoroutineScope {
-
 
     @CallSuper
     override fun onShow(context: Context) {
@@ -49,7 +60,6 @@ abstract class MagellanScreen<Display : IDisplay>(
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + screenJob
 
-
     val appCtx: Context get() = App.instance.applicationContext
 
     val display: Display? get() = testDisplay ?: view?.display
@@ -61,21 +71,19 @@ abstract class MagellanScreen<Display : IDisplay>(
     }
 
     override fun createView(context: Context) =
-            MagellanView(context, screenLayout, screenSetup)
-
+        MagellanView(context, screenLayout, screenSetup)
 
     /** i18n(R.String.TAG_LOST) instead of cumbersome and unsafe activity.getString(R.String.blahblah) **/
     fun i18n(@StringRes resId: Int, vararg formatArgs: String): String =
-            appCtx.getString(resId, *formatArgs)
+        appCtx.getString(resId, *formatArgs)
 
     @ColorInt
     fun color(@ColorRes colorId: Int): Int =
-            ContextCompat.getColor(appCtx, colorId)
-
+        ContextCompat.getColor(appCtx, colorId)
 
     /** A scren is either associated to a [MainActivity] or no activity if in the background **/
     fun mainActivity(): MainActivity? =
-            (this.activity as? MainActivity)
+        (this.activity as? MainActivity)
 
     fun safeShowDialog(dialog: DialogCreator) {
         this.dialog?.run {
@@ -109,7 +117,6 @@ abstract class MagellanScreen<Display : IDisplay>(
                 val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(view.rootView.windowToken, 0) // InputMethodManager.SHOW_IMPLICIT
             }
-
         }
     }
 
@@ -122,8 +129,5 @@ abstract class MagellanScreen<Display : IDisplay>(
     }
 
     public override fun onUpdateMenu(menu: Menu) {
-
     }
-
-
 }

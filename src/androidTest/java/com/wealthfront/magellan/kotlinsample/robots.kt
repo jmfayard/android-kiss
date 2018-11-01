@@ -1,6 +1,5 @@
 package com.wealthfront.magellan.kotlinsample
 
-
 /**
  * Define a DSL for our Instrumentation Testing Robots
  *
@@ -12,7 +11,6 @@ package com.wealthfront.magellan.kotlinsample
  * See https://news.realm.io/news/kau-jake-wharton-testing-robots/
  *
  */
-
 
 fun notes(func: NotesRobot.() -> Unit) = EspressoNotesRobot().apply(func)
 
