@@ -103,6 +103,25 @@ object Libs {
     const val timber: String = "com.jakewharton.timber:timber:" + Versions.timber
 
     /**
+     * [logging-interceptor website](https://github.com/square/okhttp) */
+    const val logging_interceptor: String =
+            "com.squareup.okhttp3:logging-interceptor:" + Versions.com_squareup_okhttp3
+
+    /**
+     * [okhttp website](https://github.com/square/okhttp) */
+    const val okhttp: String = "com.squareup.okhttp3:okhttp:" + Versions.com_squareup_okhttp3
+
+    /**
+     * [converter-moshi website](https://github.com/square/retrofit/) */
+    const val converter_moshi: String =
+            "com.squareup.retrofit2:converter-moshi:" + Versions.com_squareup_retrofit2
+
+    /**
+     * [retrofit website](https://github.com/square/retrofit/) */
+    const val retrofit: String =
+            "com.squareup.retrofit2:retrofit:" + Versions.com_squareup_retrofit2
+
+    /**
      * [magellan-support website](https://github.com/wealthfront/magellan/) */
     const val magellan_support: String =
             "com.wealthfront:magellan-support:" + Versions.com_wealthfront
@@ -148,4 +167,12 @@ object Libs {
 
     const val org_jlleitschuh_gradle_ktlint_idea_gradle_plugin: String =
             "org.jlleitschuh.gradle.ktlint-idea:org.jlleitschuh.gradle.ktlint-idea.gradle.plugin:" + Versions.org_jlleitschuh_gradle_ktlint_idea_gradle_plugin
+
+    const val kodein_di_generic_jvm: String =
+            "org.kodein.di:kodein-di-generic-jvm:" + Versions.kodein_di_generic_jvm
+
+    /**
+     * [kotlin-coroutines-retrofit website](https://github.com/gildor/kotlin-coroutines-retrofit) */
+    const val kotlin_coroutines_retrofit: String =
+            "ru.gildor.coroutines:kotlin-coroutines-retrofit:" + Versions.kotlin_coroutines_retrofit
 }

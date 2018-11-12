@@ -72,6 +72,12 @@ dependencies {
     androidTestImplementation(Libs.com_android_support_test_rules)
     androidTestImplementation(Libs.com_android_support_test_runner)
     implementation(Libs.threetenabp)
+    implementation(Libs.kodein_di_generic_jvm)
+    implementation(Libs.converter_moshi)
+    implementation(Libs.retrofit)
+    implementation(Libs.okhttp)
+    implementation(Libs.kotlin_coroutines_retrofit)
+    implementation(Libs.logging_interceptor)
 }
 
 
