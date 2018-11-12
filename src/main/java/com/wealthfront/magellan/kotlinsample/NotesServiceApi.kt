@@ -1,5 +1,6 @@
 package com.wealthfront.magellan.kotlinsample
 
+import com.wealthfront.magellan.isRunningEspressoTests
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 
@@ -36,7 +37,7 @@ object NotesServiceApiImpl : NotesServiceApi {
     val NOTES_SERVICE_DATA: MutableMap<String, Note> = NOTES.associateBy { it.id }.toMutableMap()
 
     override suspend fun getAllNotes(): List<Note> = coroutineScope {
-        delay(700)
+        if (!isRunningEspressoTests) delay(700)
         NOTES_SERVICE_DATA.values.toList()
     }
 

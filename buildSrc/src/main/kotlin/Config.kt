@@ -8,7 +8,7 @@ object Config {
 
     val forceDependencyVersions = listOf(
             Libs.appcompat_v7, Libs.preference_v7, Libs.constraint_layout, Libs.design,
-            Libs.design, Libs.percent, Libs.kotlin_reflect, Libs.kotlin_test, Libs.kotlin_stdlib,
+            Libs.design, Libs.percent, Libs.kotlin_stdlib,
             Libs.recyclerview_v7, Libs.support_core_utils
     )
 

@@ -3,8 +3,12 @@ package com.wealthfront.magellan.kotlinsample
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.FrameLayout
 import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
+import com.wealthfront.magellan.IDisplay
+import com.wealthfront.magellan.MagellanScreen
+import com.wealthfront.magellan.ScreenSetups
+import com.wealthfront.magellan.UiCallback
+import com.wealthfront.magellan.UseCoroutines
 import kotlinx.coroutines.launch
 import net.idik.lib.slimadapter.SlimAdapter
 
@@ -17,8 +21,8 @@ interface Notes : IDisplay {
 
 class NotesScreen(
     val repository: NotesRepository = InMemoryRepository
-) : MagellanScreen<Notes>(
-    R.layout.notes_screen, R.string.title_notes, FrameLayout::displayNotes
+) : UseCoroutines, MagellanScreen<Notes>(
+    R.layout.notes_screen, R.string.title_notes, ScreenSetups::displayNotes
 ) {
 
     public override fun onShow(context: Context) {
@@ -44,7 +48,7 @@ class NotesScreen(
     }
 }
 
-fun FrameLayout.displayNotes() = object : Notes {
+fun ScreenSetups.displayNotes() = object : Notes {
 
     lateinit var slimAdapter: SlimAdapter
 

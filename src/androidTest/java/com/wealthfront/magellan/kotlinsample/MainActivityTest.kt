@@ -33,26 +33,26 @@ class MainActivityTest {
 
         notes {
 
-        } addNote {
+        }.addNote {
             hasTitle("")
             hasDescription("")
             enterTitle("Just Going back")
             hasTitle("Just Going back")
-        } goBack {
+        }.goBack {
 
-        } addNote {
+        }.addNote {
             hasTitle("")
             hasDescription("")
             enterTitle("Testing Robots")
             enterDescription("The Robots Pattern allows to separate WHAT a test should verify from HOW the verifications are implemented")
-        } save {
-            selectNote(position = 2)
-        } showNote {
+        }.save {
+            selectNote(position = 0)
+        }.showNote {
             hasTitle("Testing Robots")
-        } editNote {
+        }.editNote {
             hasTitle("Testing Robots")
             enterDescription("... give it a try!")
-        } save {
+        }.save {
 
         }
     }

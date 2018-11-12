@@ -83,6 +83,10 @@ object Libs {
             "com.github.MarcinMoskala:KotlinAndroidViewBindings:" + Versions.kotlinandroidviewbindings
 
     /**
+     * [ktlint website](https://github.com/shyiko/ktlint) */
+    const val ktlint: String = "com.github.shyiko:ktlint:" + Versions.ktlint
+
+    /**
      * [jsr305 website](http://findbugs.sourceforge.net/) */
     const val jsr305: String = "com.google.code.findbugs:jsr305:" + Versions.jsr305
 
@@ -90,12 +94,13 @@ object Libs {
             "com.gradle.build-scan:com.gradle.build-scan.gradle.plugin:" + Versions.com_gradle_build_scan_gradle_plugin
 
     /**
-     * [timber website](https://github.com/JakeWharton/timber) */
-    const val timber: String = "com.jakewharton.timber:timber:" + Versions.timber
+     * [threetenabp website](https://github.com/JakeWharton/ThreeTenABP/) */
+    const val threetenabp: String =
+            "com.jakewharton.threetenabp:threetenabp:" + Versions.threetenabp
 
     /**
-     * [mockito-kotlin website](https://github.com/nhaarman/mockito-kotlin) */
-    const val mockito_kotlin: String = "com.nhaarman:mockito-kotlin:" + Versions.mockito_kotlin
+     * [timber website](https://github.com/JakeWharton/timber) */
+    const val timber: String = "com.jakewharton.timber:timber:" + Versions.timber
 
     /**
      * [magellan-support website](https://github.com/wealthfront/magellan/) */
@@ -127,19 +132,9 @@ object Libs {
             "org.jetbrains.kotlin:kotlin-gradle-plugin:" + Versions.org_jetbrains_kotlin
 
     /**
-     * [kotlin-reflect website](https://kotlinlang.org/) */
-    const val kotlin_reflect: String =
-            "org.jetbrains.kotlin:kotlin-reflect:" + Versions.org_jetbrains_kotlin
-
-    /**
      * [kotlin-stdlib website](https://kotlinlang.org/) */
     const val kotlin_stdlib: String =
             "org.jetbrains.kotlin:kotlin-stdlib:" + Versions.org_jetbrains_kotlin
-
-    /**
-     * [kotlin-test website](https://kotlinlang.org/) */
-    const val kotlin_test: String =
-            "org.jetbrains.kotlin:kotlin-test:" + Versions.org_jetbrains_kotlin
 
     /**
      * [kotlinx-coroutines-android website](https://github.com/Kotlin/kotlinx.coroutines) */
@@ -150,4 +145,7 @@ object Libs {
      * [kotlinx-coroutines-core website](https://github.com/Kotlin/kotlinx.coroutines) */
     const val kotlinx_coroutines_core: String =
             "org.jetbrains.kotlinx:kotlinx-coroutines-core:" + Versions.org_jetbrains_kotlinx
+
+    const val org_jlleitschuh_gradle_ktlint_idea_gradle_plugin: String =
+            "org.jlleitschuh.gradle.ktlint-idea:org.jlleitschuh.gradle.ktlint-idea.gradle.plugin:" + Versions.org_jlleitschuh_gradle_ktlint_idea_gradle_plugin
 }

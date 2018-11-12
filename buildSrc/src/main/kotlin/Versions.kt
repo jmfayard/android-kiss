@@ -39,13 +39,15 @@ object Versions {
 
     const val kotlinandroidviewbindings: String = "0.12" 
 
+    const val ktlint: String = "0.29.0" 
+
     const val jsr305: String = "3.0.2" 
 
-    const val com_gradle_build_scan_gradle_plugin: String = "1.16" //available: "2.0.1" 
+    const val com_gradle_build_scan_gradle_plugin: String = "1.16" //available: "2.0.2" 
+
+    const val threetenabp: String = "1.1.1" 
 
     const val timber: String = "4.7.1" 
-
-    const val mockito_kotlin: String = "1.5.0" 
 
     const val com_wealthfront: String = "1.1.0" 
 
@@ -59,7 +61,10 @@ object Versions {
 
     const val org_jetbrains_kotlin: String = "1.3.0" 
 
-    const val org_jetbrains_kotlinx: String = "1.0.0" 
+    const val org_jetbrains_kotlinx: String = "1.0.0" //available: "1.0.1" 
+
+    const val org_jlleitschuh_gradle_ktlint_idea_gradle_plugin: String =
+            "6.2.1" //available: "6.3.0" 
 
     /**
      *
@@ -71,8 +76,8 @@ object Versions {
 
         const val currentVersion: String = "4.10.2"
 
-        const val nightlyVersion: String = "5.1-20181031000036+0000"
+        const val nightlyVersion: String = "5.1-20181112000041+0000"
 
-        const val releaseCandidate: String = "5.0-rc-1"
+        const val releaseCandidate: String = "5.0-rc-2"
     }
 }

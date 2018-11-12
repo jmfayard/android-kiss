@@ -1,10 +1,15 @@
 package com.wealthfront.magellan.kotlinsample
 
 import android.content.Context
-import android.widget.FrameLayout
 import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
 import com.marcinmoskala.kotlinandroidviewbindings.bindToEditText
 import com.marcinmoskala.kotlinandroidviewbindings.bindToRequestFocus
+import com.wealthfront.magellan.IDisplay
+import com.wealthfront.magellan.MagellanScreen
+import com.wealthfront.magellan.ScreenSetups
+import com.wealthfront.magellan.UiCallback
+import com.wealthfront.magellan.UseCoroutines
+import com.wealthfront.magellan.hideSoftKeyboard
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -19,11 +24,12 @@ interface AddNote : IDisplay {
 class AddNoteScreen(
     val noteId: String? = null,
     val repository: NotesRepository = InMemoryRepository
-) : MagellanScreen<AddNote>(
-    screenLayout = R.layout.addnote_screen,
-    screenTitle = if (noteId != null) R.string.title_editnote else R.string.title_addnote,
-    screenSetup = FrameLayout::displayAddNote
-) {
+) : UseCoroutines,
+    MagellanScreen<AddNote>(
+        screenLayout = R.layout.addnote_screen,
+        screenTitle = if (noteId != null) R.string.title_editnote else R.string.title_addnote,
+        screenSetup = ScreenSetups::displayAddNote
+    ) {
 
     val isEditMode = noteId != null
 
@@ -65,7 +71,7 @@ class AddNoteScreen(
     }
 }
 
-fun FrameLayout.displayAddNote() = object : AddNote {
+fun ScreenSetups.displayAddNote() = object : AddNote {
 
     override var onSubmit: UiCallback by bindToClick(R.id.add_note_save)
 

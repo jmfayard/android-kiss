@@ -2,6 +2,7 @@ package com.wealthfront.magellan.kotlinsample
 
 import android.app.Application
 import android.support.multidex.MultiDex
+import com.wealthfront.magellan.MagellanScreen
 import timber.log.Timber
 
 class App : Application() {
@@ -18,5 +19,6 @@ class App : Application() {
         Timber.plant(Timber.DebugTree())
 
         MultiDex.install(this);
+        MagellanScreen.applicationContext = applicationContext
     }
 }

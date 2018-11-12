@@ -1,5 +1,6 @@
 package com.wealthfront.magellan.kotlinsample
 
+import org.threeten.bp.Instant
 import java.util.UUID
 
 interface ListItem
@@ -8,7 +9,8 @@ data class Note(
     val id: String = UUID.randomUUID().toString(),
     val description: String,
     val title: String,
-    val url: String? = null
+    val url: String? = null,
+    val createdAt: Instant = Instant.now()
 ) : ListItem
 
 fun List<Note>.capitalize() =

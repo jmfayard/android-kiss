@@ -1,9 +1,14 @@
 package com.wealthfront.magellan.kotlinsample
 
 import android.content.Context
-import android.widget.FrameLayout
 import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
 import com.marcinmoskala.kotlinandroidviewbindings.bindToText
+import com.wealthfront.magellan.HasSnackbar
+import com.wealthfront.magellan.IDisplay
+import com.wealthfront.magellan.MagellanScreen
+import com.wealthfront.magellan.ScreenSetups
+import com.wealthfront.magellan.UiCallback
+import com.wealthfront.magellan.UseCoroutines
 import kotlinx.coroutines.launch
 
 interface NoteDetail : IDisplay {
@@ -15,8 +20,8 @@ interface NoteDetail : IDisplay {
 class NoteDetailScreen(
     val noteId: String,
     val repository: NotesRepository = InMemoryRepository
-) : MagellanScreen<NoteDetail>(
-    R.layout.notedetail_screen, R.string.title_notedetails, FrameLayout::displayNoteDetail
+) : UseCoroutines, HasSnackbar, MagellanScreen<NoteDetail>(
+    R.layout.notedetail_screen, R.string.title_notedetails, ScreenSetups::displayNoteDetail
 ) {
 
     override fun onShow(context: Context) {
@@ -39,7 +44,7 @@ class NoteDetailScreen(
     fun onEditNote() = navigator.goTo(AddNoteScreen(noteId))
 }
 
-fun FrameLayout.displayNoteDetail() = object : NoteDetail {
+fun ScreenSetups.displayNoteDetail() = object : NoteDetail {
     override var title: String by bindToText(R.id.note_detail_title)
 
     override var description: String by bindToText(R.id.note_detail_description)

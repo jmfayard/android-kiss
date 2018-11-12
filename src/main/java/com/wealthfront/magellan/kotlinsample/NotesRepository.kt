@@ -22,7 +22,7 @@ object InMemoryRepository : NotesRepository {
         if (notes != null) {
             notes!!
         } else {
-            api.getAllNotes()
+            api.getAllNotes().sortedByDescending { it.createdAt }
         }
     }
 
