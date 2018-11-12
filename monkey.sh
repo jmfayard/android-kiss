@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 export ITERATIONS=${1:-1}
 export PACKAGE="com.wealthfront.magellan.kotlinsample"
-export ACTIVITY="com.wealthfront.magellan.kotlinsample.MainActivity"
+export ACTIVITY="de.fayard.checkvist.MainActivity"
 echo "Starting $PACKAGE"
 
 export START_OK=$( adb shell am start -n ${PACKAGE}/${ACTIVITY} 2>&1 | grep -i error )

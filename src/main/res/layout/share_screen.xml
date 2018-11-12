@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/screenSharedTipsCalculator"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context="de.fayard.checkvist.MainActivity"
+              android:orientation="vertical"
+              android:layout_marginTop="36dp"
+              android:paddingStart="32dp"
+              android:paddingEnd="32dp"
+>
+
+
+    <android.support.design.widget.TextInputLayout
+            android:id="@+id/layoutPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+
+    >
+
+        <android.support.design.widget.TextInputEditText
+                android:id="@+id/inputPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="string/hint_price"
+                android:inputType="number"
+                tools:text="200"
+                style="@style/input_style"
+        />
+
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+            android:id="@+id/layoutTip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+    >
+
+        <android.support.design.widget.TextInputEditText
+                android:id="@+id/inputTip"
+                style="@style/input_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="hola"
+                android:inputType="number"
+                android:text="20"
+        />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+            android:id="@+id/layoutNumberPeople"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+    >
+
+        <android.support.design.widget.TextInputEditText
+                android:id="@+id/inputNumberPeople"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="hello"
+                android:text="4"
+                android:inputType="number"
+                style="@style/input_style"
+
+
+        />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+            android:id="@+id/buttonCalculate"
+            android:text="hiasdfa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorPrimary"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:textAllCaps="false"
+            android:textColor="@color/whiteText"
+
+            android:textSize="16sp"
+    />
+
+    <TextView
+            android:id="@+id/textResult"
+            tools:text="sdfasd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+    />
+
+
+</LinearLayout>

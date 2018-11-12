@@ -1,7 +1,8 @@
-package com.wealthfront.magellan.kotlinsample
+package de.fayard.checkvist
 
 import android.os.Bundle
 import android.view.MenuItem
+import com.wealthfront.magellan.HideUpButton
 import com.wealthfront.magellan.MagellanScreen
 import com.wealthfront.magellan.NavigationType
 import com.wealthfront.magellan.Navigator
@@ -40,7 +41,7 @@ class MainActivity : SingleActivity() {
 
     override fun createNavigator(): Navigator {
         val transition = if (isRunningTest) NoAnimationTransition() else DefaultTransition()
-        val navigator = Navigator.withRoot(NotesScreen())
+        val navigator = Navigator.withRoot(ShareScreen())
             .transition(transition)
             .loggingEnabled(true)
             .build()
@@ -54,9 +55,9 @@ class MainActivity : SingleActivity() {
             i("onShow(screen = '$title')")
 
             with(supportActionBar!!) {
-                val firstScreen = screen is NotesScreen
-                setDisplayUseLogoEnabled(firstScreen)
-                setDisplayHomeAsUpEnabled(!firstScreen)
+                val isTopScreen = screen is HideUpButton
+                setDisplayUseLogoEnabled(isTopScreen)
+                setDisplayHomeAsUpEnabled(!isTopScreen)
             }
         }
 

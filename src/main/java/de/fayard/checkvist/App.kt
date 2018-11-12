@@ -1,4 +1,4 @@
-package com.wealthfront.magellan.kotlinsample
+package de.fayard.checkvist
 
 import android.app.Application
 import android.support.multidex.MultiDex

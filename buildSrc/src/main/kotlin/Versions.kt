@@ -13,23 +13,23 @@ object Versions {
 
     const val com_android_support_test: String = "1.0.2" 
 
-    const val appcompat_v7: String = "27.0.2" 
+    const val appcompat_v7: String = "27.1.1" 
 
-    const val cardview_v7: String = "27.0.2" //available: "28.0.0" 
+    const val cardview_v7: String = "27.1.1"
 
-    const val design: String = "27.0.2" 
+    const val design: String = "27.1.1" 
 
     const val multidex: String = "1.0.3" 
 
-    const val percent: String = "27.0.2" 
+    const val percent: String = "27.1.1" 
 
-    const val preference_v7: String = "27.0.2" 
+    const val preference_v7: String = "27.1.1" 
 
-    const val recyclerview_v7: String = "27.0.2" 
+    const val recyclerview_v7: String = "27.1.1" 
 
     const val support_core_utils: String = "27.1.1" 
 
-    const val support_v4: String = "27.0.2" //available: "28.0.0" 
+    const val support_v4: String = "27.1.1"
 
     const val aapt2: String = "3.2.1-4818971" 
 
@@ -43,7 +43,7 @@ object Versions {
 
     const val jsr305: String = "3.0.2" 
 
-    const val com_gradle_build_scan_gradle_plugin: String = "1.16" //available: "2.0.2" 
+    const val com_gradle_build_scan_gradle_plugin: String = "1.16"
 
     const val threetenabp: String = "1.1.1" 
 

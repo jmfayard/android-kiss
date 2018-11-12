@@ -1,5 +1,5 @@
 object Config {
-    const val applicationId = "com.wealthfront.magellan.kotlinsample"
+    const val applicationId = "de.fayard.checkvist"
     const val compileSdkVersion = 27
     const val targetSdkVersion = 27
     const val versionName = "1.0.0"

@@ -3,13 +3,12 @@ package com.wealthfront.magellan
 import android.app.Activity
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
-import com.wealthfront.magellan.kotlinsample.R
 import com.wealthfront.magellan.support.SingleActivity
 import timber.log.Timber
 
 /** A [ScreenMarker] for a [MagellanScreen] that wish to use a SnackBar **/
 interface HasSnackbar : ScreenMarker {
-    val idCoordinatorLayout get() = R.id.coordinatorLayout
+    val idCoordinatorLayout get() = de.fayard.checkvist.R.id.coordinatorLayout
 
     fun snackbar(
         message: String,
