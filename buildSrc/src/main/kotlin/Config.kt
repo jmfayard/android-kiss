@@ -1,5 +1,6 @@
 object Config {
     const val applicationId = "de.fayard.checkvist"
+    const val activity = "de.fayard.checkvist.MainActivity"
     const val compileSdkVersion = 27
     const val targetSdkVersion = 27
     const val versionName = "1.0.0"

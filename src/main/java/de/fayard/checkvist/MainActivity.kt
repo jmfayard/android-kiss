@@ -1,9 +1,11 @@
 package de.fayard.checkvist
 
 import android.os.Bundle
+import android.util.Log.i
 import android.view.MenuItem
 import com.wealthfront.magellan.HideUpButton
 import com.wealthfront.magellan.MagellanScreen
+import com.wealthfront.magellan.MagellanScreen.Companion.applicationContext
 import com.wealthfront.magellan.NavigationType
 import com.wealthfront.magellan.Navigator
 import com.wealthfront.magellan.Screen

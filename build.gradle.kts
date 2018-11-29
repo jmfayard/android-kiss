@@ -1,3 +1,4 @@
+import Config.applicationId
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -20,6 +21,14 @@ configurations.all {
         }
     }
 }
+
+
+tasks.register<Exec>("install") {
+    dependsOn("testDebugUnitTest", "installDebug")
+    group = "Custom"
+    commandLine = "adb shell am start -n ${Config.applicationId}/${Config.activity} -a android.intent.action.MAIN -c android.intent.category.LAUNCHER".split(" ")
+}
+
 
 android {
 
