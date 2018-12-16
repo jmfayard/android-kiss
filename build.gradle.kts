@@ -5,7 +5,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("com.gradle.build-scan") version "1.16"
-    id("de.fayard.buildSrcVersions") version "0.3.1"
+    id("de.fayard.buildSrcVersions") version "0.3.2"
     id("org.jlleitschuh.gradle.ktlint-idea") version "6.2.1"
 }
 

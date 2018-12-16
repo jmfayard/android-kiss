@@ -15,7 +15,7 @@ object Versions {
 
     const val appcompat_v7: String = "27.0.2" 
 
-    const val cardview_v7: String = "27.0.2" // available: "28.0.0"
+    const val cardview_v7: String = "27.0.2" // available: "28.0.0"
 
     const val design: String = "27.0.2" 
 
@@ -29,7 +29,7 @@ object Versions {
 
     const val support_core_utils: String = "27.1.1" 
 
-    const val support_v4: String = "27.0.2" // available: "28.0.0"
+    const val support_v4: String = "27.0.2" // available: "28.0.0"
 
     const val aapt2: String = "3.2.1-4818971" 
 
@@ -43,7 +43,7 @@ object Versions {
 
     const val jsr305: String = "3.0.2" 
 
-    const val com_gradle_build_scan_gradle_plugin: String = "1.16" // available: "2.1"
+    const val com_gradle_build_scan_gradle_plugin: String = "1.16" // available: "2.1"
 
     const val threetenabp: String = "1.1.1" 
 
@@ -51,7 +51,7 @@ object Versions {
 
     const val com_wealthfront: String = "1.1.0" 
 
-    const val de_fayard_buildsrcversions_gradle_plugin: String = "0.3" // available: "0.3.0"
+    const val de_fayard_buildsrcversions_gradle_plugin: String = "0.3.2" 
 
     const val kotlintest: String = "2.0.7" 
 
@@ -59,12 +59,12 @@ object Versions {
 
     const val slimadapter: String = "2.1.2" 
 
-    const val org_jetbrains_kotlin: String = "1.3.0" // available: "1.3.11"
+    const val org_jetbrains_kotlin: String = "1.3.0" // available: "1.3.11"
 
-    const val org_jetbrains_kotlinx: String = "1.0.0" // available: "1.0.1"
+    const val org_jetbrains_kotlinx: String = "1.0.0" // available: "1.0.1"
 
-    const val org_jlleitschuh_gradle_ktlint_idea_gradle_plugin: String = "6.2.1"
-            // available: "6.3.1"
+    const val org_jlleitschuh_gradle_ktlint_idea_gradle_plugin: String = "6.2.1" 
+            // available: "6.3.1"
 
     /**
      *
@@ -76,7 +76,7 @@ object Versions {
 
         const val currentVersion: String = "5.0"
 
-        const val nightlyVersion: String = "5.2-20181215000041+0000"
+        const val nightlyVersion: String = "5.2-20181216000032+0000"
 
         const val releaseCandidate: String = "5.1-rc-1"
     }
