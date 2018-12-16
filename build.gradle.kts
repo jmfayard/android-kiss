@@ -1,10 +1,11 @@
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("com.gradle.build-scan") version "1.16"
-    id("de.fayard.buildSrcVersions") version "0.3"
+    id("de.fayard.buildSrcVersions") version "0.3.1"
     id("org.jlleitschuh.gradle.ktlint-idea") version "6.2.1"
 }
 
@@ -41,6 +42,7 @@ android {
 }
 
 dependencies {
+
 
     // Magellan, the Simplest Navigation for Android https://github.com/wealthfront/magellan
     implementation(Libs.magellan)
