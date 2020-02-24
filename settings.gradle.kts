@@ -1,17 +1,18 @@
+import de.fayard.versions.bootstrapRefreshVersions
+import de.fayard.dependencies.DependenciesPlugin
+
 pluginManagement {
     repositories {
-        maven("/Users/jmfayard/Dev/mautinoa/buildSrcVersions/build/repository")
+        mavenLocal()
         gradlePluginPortal()
-        jcenter()
         google()
+        mavenCentral()
     }
-
     resolutionStrategy {
         eachPlugin {
             val plugin = requested.id.id
             val module = when {
-                plugin.startsWith("com.android") -> Libs.com_android_tools_build_gradle
-                plugin.startsWith("kotlin")  -> Libs.kotlin_gradle_plugin
+                plugin.startsWith("com.android") -> "com.android.tools.build:gradle:3.5.3"
                 else -> return@eachPlugin
             }
             println("resolutionStrategy for plugin=$plugin : $module")
@@ -19,4 +20,27 @@ pluginManagement {
         }
     }
 }
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies.classpath("de.fayard:dependencies:0.5.6")
+}
+
+plugins {
+    id("com.gradle.enterprise").version("3.1.1")
+}
+
+
+bootstrapRefreshVersions(DependenciesPlugin.artifactVersionKeyRules)
+
 rootProject.name = "android-kotlin-magellan"
+
+gradleEnterprise {
+    buildScan {
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
+        publishAlways()
+    }
+}

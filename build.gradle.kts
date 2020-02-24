@@ -2,11 +2,8 @@ import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("com.gradle.build-scan") version "1.16"
-    id("de.fayard.buildSrcVersions") version "0.3.2"
-    id("org.jlleitschuh.gradle.ktlint-idea") version "6.2.1"
+    id("com.android.application") version "3.5.3"
+    kotlin("android") version "1.3.61"
 }
 
 repositories {
@@ -76,13 +73,6 @@ dependencies {
     implementation(Libs.threetenabp)
 }
 
-
-
-buildScan {
-    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
-    setTermsOfServiceAgree("yes")
-    publishAlways()
-}
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
