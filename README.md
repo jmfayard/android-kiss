@@ -1,3 +1,11 @@
 # Keep Android Simple And Stupid
 
-Hello human, this is just a repository where I try techniques to make Android programming more simple.
+## What is this?
+
+This is a playground repository where I try techniques to make Android programming simpler.
+
+## FAQ
+
+> Should I use this?
+
+No.

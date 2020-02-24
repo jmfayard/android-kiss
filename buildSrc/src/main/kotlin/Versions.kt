@@ -12,7 +12,7 @@ import org.gradle.plugin.use.PluginDependencySpec
  * YOU are responsible for updating manually the dependency version.
  */
 object Versions {
-    const val org_jetbrains_kotlinx_kotlinx_coroutines: String = "1.0.0" // available: "1.3.3"
+    const val org_jetbrains_kotlinx_kotlinx_coroutines: String = "1.3.3"
 
     const val com_android_support_test_espresso: String = "3.0.2"
 
@@ -34,23 +34,23 @@ object Versions {
 
     const val recyclerview_v7: String = "27.0.2"
 
-    const val kotlin_stdlib: String = "1.3.0"
+    const val kotlin_stdlib: String = "1.3.61"
 
     const val preference_v7: String = "27.0.2"
 
     const val appcompat_v7: String = "27.0.2"
 
-    const val cardview_v7: String = "27.0.2" // available: "28.0.0"
+    const val cardview_v7: String = "28.0.0"
 
     const val lint_gradle: String = "26.5.3"
 
     const val slimadapter: String = "2.1.2"
 
-    const val threetenabp: String = "1.1.1" // available: "1.2.2"
+    const val threetenabp: String = "1.2.2"
 
     const val kotlintest: String = "2.0.7"
 
-    const val support_v4: String = "27.0.2" // available: "28.0.0"
+    const val support_v4: String = "28.0.0"
 
     const val multidex: String = "1.0.3"
 
@@ -64,7 +64,7 @@ object Versions {
 
     const val aapt2: String = "3.5.3-5435860"
 
-    const val junit: String = "4.12" // available: "4.13"
+    const val junit: String = "4.13"
 
     /**
      * Current version: "6.2"
