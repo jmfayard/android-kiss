@@ -1,8 +1,7 @@
-package com.wealthfront.magellan.kotlinsample
+package de.fayard.android.kiss
 
 import android.app.Application
 import android.support.multidex.MultiDex
-import com.wealthfront.magellan.MagellanScreen
 import timber.log.Timber
 
 class App : Application() {

@@ -1,8 +1,9 @@
-package com.wealthfront.magellan
+package de.fayard.android.kiss
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.support.annotation.LayoutRes
+import com.wealthfront.magellan.BaseScreenView
 
 typealias ScreenSetups = MagellanView<*>
 

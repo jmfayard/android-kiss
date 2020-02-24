@@ -1,6 +1,6 @@
-package com.wealthfront.magellan.kotlinsample
+package de.fayard.android.kiss.notes
 
-import com.wealthfront.magellan.isRunningEspressoTests
+import de.fayard.android.kiss.isRunningEspressoTests
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 

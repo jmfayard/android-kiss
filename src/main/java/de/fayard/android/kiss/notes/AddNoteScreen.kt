@@ -1,11 +1,11 @@
-package com.wealthfront.magellan.kotlinsample
+package de.fayard.android.kiss.notes
 
 import android.content.Context
-import com.wealthfront.magellan.MagellanScreen
-import com.wealthfront.magellan.ScreenSetups
-import com.wealthfront.magellan.UseCoroutines
-import com.wealthfront.magellan.hideSoftKeyboard
+import com.marcinmoskala.kotlinandroidviewbindings.*
+import de.fayard.android.kiss.*
+import de.fayard.android.kiss.R
 import kotlinx.coroutines.launch
+
 import java.util.*
 
 

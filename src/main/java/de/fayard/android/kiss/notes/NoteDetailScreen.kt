@@ -1,14 +1,9 @@
-package com.wealthfront.magellan.kotlinsample
+package de.fayard.android.kiss.notes
 
 import android.content.Context
-import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
-import com.marcinmoskala.kotlinandroidviewbindings.bindToText
-import com.wealthfront.magellan.HasSnackbar
-import com.wealthfront.magellan.IDisplay
-import com.wealthfront.magellan.MagellanScreen
-import com.wealthfront.magellan.ScreenSetups
-import com.wealthfront.magellan.UiCallback
-import com.wealthfront.magellan.UseCoroutines
+import com.marcinmoskala.kotlinandroidviewbindings.*
+import de.fayard.android.kiss.*
+import de.fayard.android.kiss.R
 import kotlinx.coroutines.launch
 
 interface NoteDetail : IDisplay {

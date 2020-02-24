@@ -1,4 +1,4 @@
-package com.wealthfront.magellan.kotlinsample
+package de.fayard.android.kiss.notes
 
 import org.threeten.bp.Instant
 import java.util.UUID

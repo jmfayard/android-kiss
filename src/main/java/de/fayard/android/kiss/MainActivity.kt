@@ -1,16 +1,15 @@
-package com.wealthfront.magellan.kotlinsample
+package de.fayard.android.kiss
 
 import android.os.Bundle
 import android.view.MenuItem
-import com.wealthfront.magellan.MagellanScreen
 import com.wealthfront.magellan.NavigationType
 import com.wealthfront.magellan.Navigator
 import com.wealthfront.magellan.Screen
 import com.wealthfront.magellan.ScreenLifecycleListener
-import com.wealthfront.magellan.isRunningTest
 import com.wealthfront.magellan.support.SingleActivity
 import com.wealthfront.magellan.transitions.DefaultTransition
 import com.wealthfront.magellan.transitions.NoAnimationTransition
+import de.fayard.android.kiss.notes.NotesScreen
 import timber.log.Timber.i
 
 /** A [MagellanScreen] is either associated to a [MainActivity] or no activity if in the background **/

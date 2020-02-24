@@ -1,9 +1,9 @@
-package com.wealthfront.magellan
+package de.fayard.android.kiss
 
 import android.app.Activity
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
-import com.wealthfront.magellan.kotlinsample.R
+import de.fayard.android.kiss.R
 import com.wealthfront.magellan.support.SingleActivity
 import timber.log.Timber
 

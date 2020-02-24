@@ -1,4 +1,4 @@
-package com.wealthfront.magellan.kotlinsample
+package de.fayard.android.kiss.notes
 
 import kotlinx.coroutines.coroutineScope
 

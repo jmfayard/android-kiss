@@ -1,4 +1,4 @@
-package com.wealthfront.magellan
+package de.fayard.android.kiss
 
 import android.app.Activity
 import android.content.Context
@@ -6,6 +6,10 @@ import android.support.annotation.CallSuper
 import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
 import android.support.annotation.VisibleForTesting
+import com.wealthfront.magellan.DialogCreator
+import com.wealthfront.magellan.NavigationType
+import com.wealthfront.magellan.Navigator
+import com.wealthfront.magellan.Screen
 
 /** See [MagellanScreen], [MagellanView] **/
 interface IDisplay

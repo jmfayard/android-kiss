@@ -1,11 +1,8 @@
-package com.wealthfront.magellan.kotlinsample
+package de.fayard.android.kiss.notes
 
-import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
-import com.marcinmoskala.kotlinandroidviewbindings.bindToEditText
-import com.marcinmoskala.kotlinandroidviewbindings.bindToRequestFocus
-import com.wealthfront.magellan.IDisplay
-import com.wealthfront.magellan.ScreenSetups
-import com.wealthfront.magellan.UiCallback
+import com.marcinmoskala.kotlinandroidviewbindings.*
+import de.fayard.android.kiss.*
+import de.fayard.android.kiss.R
 
 interface AddNote : IDisplay {
   var onSubmit: UiCallback

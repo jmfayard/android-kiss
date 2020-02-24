@@ -1,14 +1,10 @@
-package com.wealthfront.magellan.kotlinsample
+package de.fayard.android.kiss.notes
 
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.marcinmoskala.kotlinandroidviewbindings.bindToClick
-import com.wealthfront.magellan.IDisplay
-import com.wealthfront.magellan.MagellanScreen
-import com.wealthfront.magellan.ScreenSetups
-import com.wealthfront.magellan.UiCallback
-import com.wealthfront.magellan.UseCoroutines
+import de.fayard.android.kiss.*
 import kotlinx.coroutines.launch
 import net.idik.lib.slimadapter.SlimAdapter
 

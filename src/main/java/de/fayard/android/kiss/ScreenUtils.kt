@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.wealthfront.magellan
+package de.fayard.android.kiss
 
 import android.content.Context
 import android.os.Handler

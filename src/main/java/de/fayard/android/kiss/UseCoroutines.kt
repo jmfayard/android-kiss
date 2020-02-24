@@ -1,4 +1,4 @@
-package com.wealthfront.magellan
+package de.fayard.android.kiss
 
 import android.content.Context
 import kotlinx.coroutines.CoroutineExceptionHandler
