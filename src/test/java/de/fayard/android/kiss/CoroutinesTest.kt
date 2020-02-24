@@ -8,6 +8,6 @@ class CoroutinesTest {
 
     @Test
     fun dummy() {
-        2 + 2 shouldBe 5
+        2 + 2 shouldBe 4
     }
 }
