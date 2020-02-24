@@ -35,7 +35,7 @@ plugins {
 
 //bootstrapRefreshVersions(DependenciesPlugin.artifactVersionKeyRules)
 
-rootProject.name = "android-kotlin-magellan"
+rootProject.name = "android-kiss"
 
 gradleEnterprise {
     buildScan {

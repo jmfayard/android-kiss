@@ -12,24 +12,40 @@ repositories {
   jcenter()
   maven("https://jitpack.io")
 }
+
+val forceDependencyVersions = listOf(
+  Libs.appcompat_v7, Libs.preference_v7, Libs.constraint_layout, Libs.design,
+  Libs.design, Libs.percent,
+  Libs.recyclerview_v7, Libs.support_core_utils, Libs.kotlin_stdlib
+)
+
 configurations.all {
   resolutionStrategy {
-    for (version in Config.forceDependencyVersions) {
+    for (version in forceDependencyVersions) {
       force(version)
     }
   }
 }
 
-android {
 
-  compileSdkVersion(Config.compileSdkVersion)
+android {
+  // See file "gradle.properties"
+  val androidApplicationId: String by project
+  val androidVersionName: String by project
+  val androidCompileSdkVersion: String  by project
+  val androidTargetSdkVersion: String  by project
+  val androidMinSdkVersion: String  by project
+  val androidVersionCode: String  by project
+
+
+  compileSdkVersion(androidCompileSdkVersion.toInt())
 
   defaultConfig {
-    minSdkVersion(Config.minSdkVersion)
-    targetSdkVersion(Config.targetSdkVersion)
-    versionCode = Config.versionCode
-    versionName = Config.versionName
-    applicationId = Config.applicationId
+    minSdkVersion(androidMinSdkVersion.toInt())
+    targetSdkVersion(androidTargetSdkVersion.toInt())
+    versionCode = androidVersionCode.toInt()
+    versionName = androidVersionName
+    applicationId = androidApplicationId
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
     multiDexEnabled = true
   }
