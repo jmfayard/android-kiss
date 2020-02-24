@@ -28,17 +28,17 @@ object Versions {
 
     const val kotlinandroidviewbindings: String = "0.12"
 
-    const val support_core_utils: String = "27.1.1"
+    const val support_core_utils: String = "28.0.0"
 
     const val constraint_layout: String = "1.0.2"
 
-    const val recyclerview_v7: String = "27.0.2"
+    const val recyclerview_v7: String = "28.0.0"
 
     const val kotlin_stdlib: String = "1.3.61"
 
-    const val preference_v7: String = "27.0.2"
+    const val preference_v7: String = "28.0.0"
 
-    const val appcompat_v7: String = "27.0.2"
+    const val appcompat_v7: String = "28.0.0"
 
     const val cardview_v7: String = "28.0.0"
 
@@ -54,9 +54,9 @@ object Versions {
 
     const val multidex: String = "1.0.3"
 
-    const val percent: String = "27.0.2"
+    const val percent: String = "28.0.0"
 
-    const val design: String = "27.0.2"
+    const val design: String = "28.0.0"
 
     const val jsr305: String = "3.0.2"
 
