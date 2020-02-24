@@ -23,6 +23,21 @@ interface NotesServiceApi {
 object NotesServiceApiImpl : NotesServiceApi {
     val NOTES = mutableListOf(
         Note(
+            title = "jmfayard/refreshVersions",
+            description = "Better dependencies management with Gradle, IntelliJ & Android Studio https://jmfayard.dev",
+            url = "https://github.com/jmfayard/refreshVersions"
+        ),
+        Note(
+            title = "LouisCAD/Splitties",
+            description = "A family of small Kotlin libraries for delightful Android development",
+            url = "https://github.com/louiscad/splitties"
+        ),
+        Note(
+            title = "jmfayard/android-kiss",
+            description = "Keep it Simple and Stupid, Android edition",
+            url = "https://github.com/jmfayard/android-kiss"
+        ),
+        Note(
             description = "The simplest navigation library for Android.",
             title = "Magellan",
             url = "https://github.com/wealthfront/magellan"

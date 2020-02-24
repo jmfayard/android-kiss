@@ -37,7 +37,7 @@ class NoteDetailScreen(
             navigator.goBack()
         } else {
             display?.title = note.title
-            display?.description = note.description
+            display?.description = "${note.description}\n🔗 ${note.url}"
         }
     }
 
