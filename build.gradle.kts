@@ -4,6 +4,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("com.android.application") version "3.5.3"
     kotlin("android") version "1.3.61"
+    id("de.fayard.buildSrcVersions") version "0.7.0"
+
 }
 
 repositories {

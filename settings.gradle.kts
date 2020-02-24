@@ -1,5 +1,5 @@
-import de.fayard.versions.bootstrapRefreshVersions
-import de.fayard.dependencies.DependenciesPlugin
+//import de.fayard.versions.bootstrapRefreshVersions
+//import de.fayard.dependencies.DependenciesPlugin
 
 pluginManagement {
     repositories {
@@ -25,7 +25,7 @@ buildscript {
     repositories {
         gradlePluginPortal()
     }
-    dependencies.classpath("de.fayard:dependencies:0.5.6")
+    //dependencies.classpath("de.fayard:dependencies:0.5.6")
 }
 
 plugins {
@@ -33,7 +33,7 @@ plugins {
 }
 
 
-bootstrapRefreshVersions(DependenciesPlugin.artifactVersionKeyRules)
+//bootstrapRefreshVersions(DependenciesPlugin.artifactVersionKeyRules)
 
 rootProject.name = "android-kotlin-magellan"
 
