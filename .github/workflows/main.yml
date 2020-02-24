@@ -1,19 +1,7 @@
 # https://help.github.com/en/github/automating-your-workflow-with-github-actions/workflow-syntax-for-github-actions
 # https://github.com/marketplace/actions/gradle-command
 name: Run unit tests on each commit
-on:
-  pull_request:
-    paths:
-      - '!**.md'
-      - '!.editorconfig'
-      - '!**/.gitignore'
-      - '!**.adoc'
-  push:
-    paths:
-      - '!**.md'
-      - '!.editorconfig'
-      - '!**/.gitignore'
-      - '!**.adoc'
+on: [push, pull_request]
 jobs:
   unittests:
     runs-on: ubuntu-latest    
