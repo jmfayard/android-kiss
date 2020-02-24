@@ -15,3 +15,10 @@ jobs:
       - uses: eskatos/gradle-command-action@v1
         with:
           arguments: testDebugUnitTest
+      - uses: gradle/wrapper-validation-action@v1
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@master
+        if: failure()
+        with:
+          message: Build failed ${{ steps.gradle.outputs.build-scan-url }}
+          GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}      
