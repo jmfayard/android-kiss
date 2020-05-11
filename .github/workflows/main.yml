@@ -13,6 +13,7 @@ jobs:
       - uses: eskatos/gradle-command-action@v1
         with:
           arguments: testDebugUnitTest
+        id: gradle
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@master
         if: failure()
